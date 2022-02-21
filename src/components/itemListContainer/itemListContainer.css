@@ -1,0 +1,43 @@
+.items-panel {
+    margin-top: 8vh;
+    width: 70vw;
+    height: 40vh;
+    min-width: 900px;
+    min-height: 330px;
+}
+
+.carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-container .icon {
+    cursor: pointer;
+}
+
+.carousel-container .icon:hover {
+    color: gray;
+}
+
+.items-container {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(5, 1fr);
+
+}
+
+.items-panel h2 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: medium;
+    font-weight: 500;
+}
+
+.items-panel hr {
+    color: #9ab;
+    background-color: rgb(84, 91, 97);
+    height: 0.1px;
+    margin-bottom: 10px;
+    border: none;
+}
+

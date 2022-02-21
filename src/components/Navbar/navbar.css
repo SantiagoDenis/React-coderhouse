@@ -5,10 +5,10 @@
     min-height: 52px;
     background-color: #14181c;
     color: #9ab;
-    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
   }
   
   .container {
@@ -48,28 +48,11 @@
     align-items: center;
   }
   
-  .header-links .search-input {
-    display: flex;
-  }
-  
-  .search-input #search-bar {
-    padding: 1%;
-    border: none;
-    border-bottom: 1px solid #9ab;
-    background-color: transparent;
-  
-  }
-
-  .shop {
-    color: #780D16;
-  }
-  
-
-  
-  .header-links #search-bar:hover, .header-links .links:hover {
-    border-bottom: 2px solid black;
+  .header-links .links:hover {
+    color: rgb(211, 234, 255);
     
-  }
+}
+
 
 /* ================== Media Queries ================== */
 @media screen and (max-width: 768px) {

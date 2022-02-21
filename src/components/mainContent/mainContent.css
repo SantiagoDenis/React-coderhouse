@@ -1,0 +1,14 @@
+.main-container {
+    background-color: #1e242c;
+
+    width: 100vw;
+    display: grid;
+    justify-content: center;
+    color: #9ab;
+}
+
+.main-container h1 {
+    text-align: center;
+    font-weight: 200;
+
+}
