@@ -1,0 +1,58 @@
+
+.count-container {
+    display: grid;
+    grid-template-rows: .5fr 2fr;
+    grid-template-columns: 1fr;
+    width: 100%;
+    height: 20%;
+    justify-content: center;
+    align-items: center;
+}
+
+.count-container p {
+    text-align: center;
+}
+
+.counter {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.count-container h2 {
+    width: 40%;
+    height: 35%;
+    text-align: center;
+    text-justify: auto;
+    background-color: rgb(29, 29, 39);
+}
+
+.count-container button {
+    height: 35%;
+    width: 10%;
+    border: none;
+    color: #9ab;
+    background-color: rgb(29, 29, 39);
+    cursor: pointer;
+
+}
+
+.left-btn {
+    border-radius: 3px 0 0 3px;
+}
+
+.right-btn {
+    border-radius: 0 3px 3px 0;
+}
+
+.count-container button:hover {
+    color: rgb(115, 125, 136);
+}
+
+.count-container button .count-icon {
+    width: 100%;
+    height: 70%;
+}

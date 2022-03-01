@@ -5,17 +5,47 @@
     justify-content: center;
     max-height: 300px;
     max-width: 220px;
+    position: relative;
 }
+
+.over-img {
+    background-color: rgba(27, 28, 32, 0.9);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+
+.over-img .options {
+    margin-top: auto;
+    margin-bottom: 30%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.options-btn {
+    padding: 10px;
+    text-align: center;
+    color: white;
+    background-color: rgba(7, 8, 8, .7);
+    border: none;
+    border-radius: 3px;
+    width: 60%;
+ 
+
+}
+
 
 .item-container img {
     width: 100%;
     height: 100%;
     border-radius: 3%;
     border: #9ab solid 1px;
-    cursor: pointer;
-}
-
-.item-container img:hover {
-    border: rgb(120, 13, 22) solid 3px;
 
 }
+

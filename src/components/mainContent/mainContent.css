@@ -5,9 +5,10 @@
     display: grid;
     justify-content: center;
     color: #9ab;
+    position: relative;
 }
 
-.main-container h1 {
+.main-container .greetings {
     text-align: center;
     font-weight: 200;
 
