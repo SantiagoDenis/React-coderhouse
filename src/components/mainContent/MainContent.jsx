@@ -7,7 +7,7 @@ import Modal from '../modal/Modal'
 import '../modal/modal.css'
 import { useState } from 'react'
 
-const MainContent = ({greetings, data, setItems}) => {
+const MainContent = ({greetings, films, loader}) => {
     const [isModalShown, setIsModalShown] = useState(false)
 
     const handleOptions = () => {
@@ -20,9 +20,9 @@ const MainContent = ({greetings, data, setItems}) => {
 
             <Search />
 
-            <ItemListContainer heading='Populares de esta semana' func={handleOptions}/>
-                {isModalShown && <Modal func={handleOptions} data={data} setItems={setItems} />}
-            <ItemListContainer heading='Avalados por la critica'/>
+            <ItemListContainer heading='Populares de esta semana' func={handleOptions} films={films} loader={loader}/>
+                {isModalShown && <Modal func={handleOptions} films={films} />}
+            <ItemListContainer heading='Avalados por la critica' func={handleOptions} films={films} loader={loader}/>
         </div>
     )
 }

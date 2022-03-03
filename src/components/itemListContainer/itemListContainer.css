@@ -20,13 +20,6 @@
     color: gray;
 }
 
-.items-container {
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: repeat(5, 1fr);
-
-}
-
 .items-panel h2 {
     font-family: 'Quicksand', sans-serif;
     font-size: medium;

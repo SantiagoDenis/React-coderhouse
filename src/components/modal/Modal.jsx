@@ -1,16 +1,17 @@
 
-import image from '../item/fightClub.jpg';
+import image from '../../helpers/fightClub.jpg';
 import ItemCount from '../itemCount/ItemCount';
 import '../itemCount/itemCount.css'
 import { Icon } from '@iconify/react'
 import { useState } from 'react';
 
-const Modal = ({func, data}) => {
+const Modal = ({func, films}) => {
 
+    const film = films[0]
     const [count, setCount] = useState(1)
 
     const handleAdd = () => {
-        if (count < data.stock) {
+        if (count < film.stock) {
             setCount(prevCount => prevCount + 1)
         }
     }
@@ -30,23 +31,22 @@ const Modal = ({func, data}) => {
                         <img src={image} alt="fight club poster"/>
                     </div>
                     <div className="secondary-info">
-                        <h1>{data.filmName}</h1>
+                        <h1>{film.filmName}</h1>
                         <hr />                        
-                        <p>{data.sinopsis}</p>
+                        <p>{film.sinopsis}</p>
                     </div>
                 </div>
                 {
-                    data.stock === 0 
+                    film.stock === 0 
                     ? 
                     <div className="film-options">
-                    {/* <button>Add to watchlist</button> */}
                         <h1>Ups! Parece que no tenemos stock por el momento! <br /> Vuelve mas tarde!</h1>
                     </div>
                     :
                     <div className="film-options">
-                    {/* <button>Add to watchlist</button> */}
-                        <ItemCount data={data} count={count} onAdd={handleAdd} onDecrement={handleDecrement}/>
-                        <h3>Precio total: {data.price * count}</h3>
+
+                        <ItemCount film={film} count={count} onAdd={handleAdd} onDecrement={handleDecrement}/>
+                        <h3>Precio total: {film.price * count}</h3>
                         <button className='film-options-btn'><b>Agregar al carrito</b></button>
                         <button className='film-options-btn'><b>Comprar ahora</b></button>
                     </div>
@@ -58,4 +58,4 @@ const Modal = ({func, data}) => {
         </div>
     )
 }
-export default Modal
+export default Modal 
