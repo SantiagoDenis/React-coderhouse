@@ -1,4 +1,4 @@
-import { Icon } from '@iconify/react';
+
 import CartWidget from '../cart/CartWidget';
 
 const Navbar = () => {

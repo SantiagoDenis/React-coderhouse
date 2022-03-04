@@ -1,6 +1,6 @@
 
 import image from './fightClub.jpg';
-/* TENES QUE MAPEAR EL ARRAY PARA PODER VERLO EN EL MODAL */
+
 
 
 const fakeDatabase = [

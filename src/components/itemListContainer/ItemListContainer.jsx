@@ -1,8 +1,5 @@
 import { Icon } from "@iconify/react";
 
-
-import { useState, useEffect } from "react";
-
 import ItemList from "../itemList/ItemList";
 
 const ItemListContainer = ({heading, func, films, loader}) => {

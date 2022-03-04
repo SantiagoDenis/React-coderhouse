@@ -3,15 +3,15 @@ import '../itemListContainer/itemListContainer.css'
 import ItemListContainer from '../itemListContainer/ItemListContainer'
 import Search from '../search/Search'
 import '../search/search.css'
-import Modal from '../modal/Modal'
-import '../modal/modal.css'
+import ItemDetailsContainer from '../itemDetailsContainer/ItemDetailsContainer'
+import '../itemDetailsContainer/itemDetailsContainer.css'
 import { useState } from 'react'
 
 const MainContent = ({greetings, films, loader}) => {
-    const [isModalShown, setIsModalShown] = useState(false)
+    const [isItemDetailsContainerShown, setIsItemDetailsContainerShown] = useState(false)
 
     const handleOptions = () => {
-        setIsModalShown( prevIsModalShown => !prevIsModalShown)
+        setIsItemDetailsContainerShown( prevIsItemDetailsContainerShown => !prevIsItemDetailsContainerShown)
     }
     
     return (
@@ -21,7 +21,7 @@ const MainContent = ({greetings, films, loader}) => {
             <Search />
 
             <ItemListContainer heading='Populares de esta semana' func={handleOptions} films={films} loader={loader}/>
-                {isModalShown && <Modal func={handleOptions} films={films} />}
+            {isItemDetailsContainerShown && <ItemDetailsContainer func={handleOptions} films={films} />}
             <ItemListContainer heading='Avalados por la critica' func={handleOptions} films={films} loader={loader}/>
         </div>
     )

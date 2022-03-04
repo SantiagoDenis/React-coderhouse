@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 
 const Item = ({func, film}) => {
-    console.log(film)
 
      const [isOptionsShown, setIsOptionsShown] = useState(false)
  

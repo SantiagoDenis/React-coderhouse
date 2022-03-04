@@ -1,7 +1,7 @@
 
 import { Icon } from "@iconify/react";
 import '../item/item.css'
-import Item from '../item/Item'
+
 
 const Search = () => {
     return ( 
