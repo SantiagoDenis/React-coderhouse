@@ -26,11 +26,6 @@ const ItemDetails = ({films}) => {
         setIsAddClicked(prevIsAddClicked => !prevIsAddClicked)
     }
 
-    const handleFinishShop = () => {
-        navigate('/')
-        alert('La compra se ha realizado con exito!')
-    }
-
     let navigate = useNavigate()
     
     return (
@@ -64,7 +59,7 @@ const ItemDetails = ({films}) => {
                     :
                     <>
                         <button className='film-options-btn' onClick={() => {navigate('/cart')}}><b>Ir al carrito</b></button>
-                        <button className='film-options-btn' onClick={handleFinishShop}><b>Terminar compra</b></button>
+                        <button className='film-options-btn' onClick={() => {navigate('/')}}><b>Seguir comprando</b></button>
                     </>
                     }
                 </div>
