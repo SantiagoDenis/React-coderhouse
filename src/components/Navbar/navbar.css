@@ -3,12 +3,15 @@
     width: 100vw;
     height: 10vh;
     min-height: 52px;
-    background-color: #14181c;
+/*     background-color: #14181c;  */
+    background-color: transparent;
     color: #9ab;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
+    position: fixed;
+    z-index: 100;
+    box-shadow: 0px 0px 16px 0px rgb(0, 0, 0);
   }
   
   .container {
@@ -46,6 +49,10 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+  }
+
+  .header-links .links {
+    cursor: pointer;
   }
   
   .header-links .links:hover {

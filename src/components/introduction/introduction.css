@@ -1,0 +1,74 @@
+.background-image {
+    width: 100vw;
+    height: 130vh;
+    background-image: url('./cut-image.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+
+
+.gradient {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-image: linear-gradient(90deg,#14181d 0,rgba(20,24,29,.986) .97%,rgba(20,24,29,.945) 2.07833333%,rgba(20,24,29,.883) 3.29666667%,rgba(20,24,29,.803) 4.60166667%,rgba(20,24,29,.711) 5.96666667%,rgba(20,24,29,.61) 7.365%,rgba(20,24,29,.504) 8.77166667%,rgba(20,24,29,.398) 10.16%,rgba(20,24,29,.296) 11.505%,rgba(20,24,29,.203) 12.78%,rgba(20,24,29,.122) 13.95833333%,rgba(20,24,29,.059) 15.01666667%,rgba(20,24,29,.016) 15.92833333%,rgba(20,24,29,0) 16.66666667%,rgba(20,24,29,0) 83.33333333%,rgba(20,24,29,.016) 84.07166667%,rgba(20,24,29,.059) 84.98333333%,rgba(20,24,29,.122) 86.04166667%,rgba(20,24,29,.203) 87.22%,rgba(20,24,29,.296) 88.495%,rgba(20,24,29,.398) 89.84%,rgba(20,24,29,.504) 91.22833333%,rgba(20,24,29,.61) 92.635%,rgba(20,24,29,.711) 94.03333333%,rgba(20,24,29,.803) 95.39833333%,rgba(20,24,29,.883) 96.70333333%,rgba(20,24,29,.945) 97.92166667%,rgba(20,24,29,.986) 99.03%,#14181d),linear-gradient(0deg,#14181d 0,#14181d 21.48148148%,rgba(20,24,29,.986) 23.63703704%,rgba(20,24,29,.945) 26.1%,rgba(20,24,29,.883) 28.80740741%,rgba(20,24,29,.803) 31.70740741%,rgba(20,24,29,.711) 34.74074074%,rgba(20,24,29,.61) 37.84814815%,rgba(20,24,29,.504) 40.97407407%,rgba(20,24,29,.398) 44.05925926%,rgba(20,24,29,.296) 47.04814815%,rgba(20,24,29,.203) 49.88148148%,rgba(20,24,29,.122) 52.5%,rgba(20,24,29,.059) 54.85185185%,rgba(20,24,29,.016) 56.87777778%,rgba(20,24,29,0) 58.51851852%);
+}
+
+
+
+.intro-sign {
+    margin-top: 20%;
+    width: 50%;
+    height: 20%;
+    background-color: rgba(65, 65, 65, 0.1);
+    backdrop-filter: blur(10px);
+    color: #9ab;
+    border-radius: 10px;
+    box-shadow: 0px 0px 16px 0px rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: rgba(126, 126, 126, 0.1) solid .3px;
+}
+
+.blur-img {
+    backdrop-filter: blur(10px);
+    filter: blur(4px);
+    transition: 0.5s ease;
+}
+
+.intro-title {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 100;
+    font-size: 1.7em;
+    margin-bottom: auto;
+    margin-top: 5px;
+    
+}
+
+
+.intro-btn {
+    padding: 10px;
+    text-align: center;
+    border: none;
+    border-radius: 3px;
+    width: 50%;
+    background-color: rgba(49, 49, 49, 0.1);
+    backdrop-filter: blur(10px);
+    color: #9ab;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: .9em;
+}
+
+.red {
+    background-color: rgba(168, 2, 2, 0.103);
+}
+
+.intro-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}

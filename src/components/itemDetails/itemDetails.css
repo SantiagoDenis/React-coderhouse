@@ -1,8 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Neuton:wght@700&display=swap');
+
 
 .details-container {
     width: 100%;
     height: 100%;
-    background-color: rgb(19, 19, 26);
     display: grid;
     grid-template-columns: 2fr 1fr .1fr;
     grid-template-rows: 1fr;
@@ -22,7 +23,7 @@
 
 .primary-info img {
     height: 50%;
-    width: 75%;
+    width: 85%;
     border-radius: 3%;
     border: #9ab solid 1px;
     margin-top: 100px;
@@ -51,10 +52,18 @@
     margin-top: 100px;
 }
 
+.secondary-info h1 {
+    font-family: 'Neuton', serif;
+    font-size: 2.3em;
+    text-shadow: #000 2px 0 5px;
+    color: white;
+}
+
 .film-options h1 {
     text-align: left;
     font-weight: 200;
     margin-left: 40px;
+
 }
 
 .film-options-btn {

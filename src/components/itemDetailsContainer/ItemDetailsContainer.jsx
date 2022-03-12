@@ -6,7 +6,7 @@ import '../itemCount/itemCount.css'
 import ItemDetails from '../itemDetails/ItemDetails'
 import '../itemDetails/itemDetails.css'
 
-const ItemDetailsContainer = ({func, films}) => {
+const ItemDetailsContainer = ({films}) => {
     const [load, setLoad] = useState('')
     
     useEffect( () => {
@@ -29,12 +29,20 @@ const ItemDetailsContainer = ({func, films}) => {
         
         load === '200'
         ? 
-        <div className="itemDetails-container">
-            <ItemDetails func={func} films={films}/>
+        <div className="details-wrapper">
+            <div className="background-image-details">
+                <div className="gradient-details">
+                </div>
+            </div>
+            <div className="itemDetails-container">
+                <ItemDetails films={films}/>
 
+            </div>
         </div>
         :
-        <h1>Cargando contenido</h1>
+        <div className="loader-container">
+            <h1>Cargando contenido</h1>
+        </div>
     )
 }
 export default ItemDetailsContainer 

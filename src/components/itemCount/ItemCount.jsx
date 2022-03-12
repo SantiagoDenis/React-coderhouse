@@ -4,19 +4,6 @@ import { Icon } from '@iconify/react'
 const ItemCount = ({film, count, onAdd, onDecrement}) => {
 
 
-/*     const [count, setCount] = useState(1)
-    const handleAdd = () => {
-        if (count < data.stock) {
-            setCount(prevCount => prevCount + 1)
-        }
-    }
-    const handleDecrement = () => {
-        if (count > 1) {
-            setCount(prevCount => prevCount - 1)
-        }
-    }
- */
-
     return (
         <div className="count-container">  
             <p>En stock: {film.stock}</p> 

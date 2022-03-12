@@ -1,13 +1,15 @@
 import image from '../../helpers/fightClub.jpg'
 import ItemCount from '../itemCount/ItemCount'
 import { useState } from 'react'
-import { Icon } from '@iconify/react'
 
-const ItemDetails = ({func, films}) => {
+import { useNavigate } from 'react-router-dom';
+
+const ItemDetails = ({films}) => {
     
     
     const film = films[0]
     const [count, setCount] = useState(1)
+    const [isAddClicked, setIsAddClicked] = useState(false)
 
     const handleAdd = () => {
         if (count < film.stock) {
@@ -19,12 +21,24 @@ const ItemDetails = ({func, films}) => {
             setCount(prevCount => prevCount - 1)
         }
     }
+
+    const handleAddClicked = () => {
+        setIsAddClicked(prevIsAddClicked => !prevIsAddClicked)
+    }
+
+    const handleFinishShop = () => {
+        navigate('/')
+        alert('La compra se ha realizado con exito!')
+    }
+
+    let navigate = useNavigate()
     
     return (
+
         <div className="details-container">
             <div className="film-info">
                 <div className="primary-info">
-                    <img src={image} alt="fight club poster"/>
+                    <img src={film.img} alt="fight club poster"/>
                 </div>
                 <div className="secondary-info">
                     <h1>{film.filmName}</h1>
@@ -43,13 +57,18 @@ const ItemDetails = ({func, films}) => {
 
                     <ItemCount film={film} count={count} onAdd={handleAdd} onDecrement={handleDecrement}/>
                     <h3>Precio total: {film.price * count}</h3>
-                    <button className='film-options-btn'><b>Agregar al carrito</b></button>
-                    <button className='film-options-btn'><b>Comprar ahora</b></button>
+
+                    {!isAddClicked 
+                    ?
+                        <button className='film-options-btn' onClick={handleAddClicked}>Agregar al carrito</button>
+                    :
+                    <>
+                        <button className='film-options-btn' onClick={() => {navigate('/cart')}}><b>Ir al carrito</b></button>
+                        <button className='film-options-btn' onClick={handleFinishShop}><b>Terminar compra</b></button>
+                    </>
+                    }
                 </div>
             }
-            <div className="exit">
-                <button onClick={func}><Icon className='close-button' icon="ant-design:close-circle-twotone" /></button>
-            </div>
         </div>
     )
 }

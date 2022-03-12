@@ -1,9 +1,18 @@
 
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
-const Item = ({func, film}) => {
+const Item = ({film, removeIntro}) => {
+
+    let navigate = useNavigate()
+
+    const navigateAndRemove = (navigationUrl) => {
+        navigate(navigationUrl)
+        removeIntro()
+    }
+    useEffect( () => {})    
 
      const [isOptionsShown, setIsOptionsShown] = useState(false)
  
@@ -26,7 +35,9 @@ const Item = ({func, film}) => {
                 <div className="over-img" onMouseLeave={handleMouseLeave}>
                     <h3>{film.filmName}</h3>
                     <div className="options">
-                        <button onClick={func} className='options-btn'>Detalles</button>
+                        <button onClick={() => {
+                            navigateAndRemove(`/item/${film.id}`)
+                        }} className='options-btn'>Detalles</button>
                     </div>
                 </div>
             }
