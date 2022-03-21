@@ -7,6 +7,8 @@
     height: 20%;
     justify-content: center;
     align-items: center;
+    min-width: 230px;
+    min-height: 100px;
 }
 
 .count-container p {

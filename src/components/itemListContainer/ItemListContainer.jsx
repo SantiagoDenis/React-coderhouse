@@ -3,11 +3,12 @@ import { useState, useEffect } from 'react';
 
 import { useParams } from "react-router-dom";
 import ItemList from "../itemList/ItemList";
+import './itemListContainer.css'
 
 import fakeApi from '../../helpers/promise';
 
 import Search from '../search/Search';
-import '../search/search.css'
+
 
 
 const ItemListContainer = ({removeIntro}) => {

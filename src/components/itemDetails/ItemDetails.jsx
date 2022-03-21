@@ -1,32 +1,38 @@
-import image from '../../helpers/fightClub.jpg'
+
 import ItemCount from '../itemCount/ItemCount'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import './itemDetails.css'
 
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { CartContext } from '../../context/CartContext';
 
-const ItemDetails = ({films}) => {
+
+const ItemDetails = ({films, id}) => {
     
+
+    //Asi funciona
+    const film = films[id - 1]
+
+    //Asi no funciona. No entiendo por que... El error que devuelve es "cannot read properties of undefined. Reading 'price'." Por lo que creo, no entiende que es film. Pero haciendo arriba algo muy similar si lo entiende.
+    //const film = films.find( (film) => film.id === id)
+
+    const {addItem, removeItem} = useContext(CartContext)
     
-    const film = films[0]
     const [count, setCount] = useState(1)
-    const [isAddClicked, setIsAddClicked] = useState(false)
 
-    const handleAdd = () => {
-        if (count < film.stock) {
-            setCount(prevCount => prevCount + 1)
-        }
-    }
-    const handleDecrement = () => {
-        if (count > 1) {
-            setCount(prevCount => prevCount - 1)
-        }
-    }
+    const [isAddClicked, setIsAddClicked] = useState(false)
+    const [price, setPrice] = useState(film.price)
 
     const handleAddClicked = () => {
         setIsAddClicked(prevIsAddClicked => !prevIsAddClicked)
+        addItem(film, count, price)
     }
 
-    let navigate = useNavigate()
+    const handleEndOfShop = () => {
+        removeItem(film.id)
+        alert('Su compra ha sido exitosa!')
+    }
+
     
     return (
 
@@ -50,17 +56,27 @@ const ItemDetails = ({films}) => {
                 :
                 <div className="film-options">
 
-                    <ItemCount film={film} count={count} onAdd={handleAdd} onDecrement={handleDecrement}/>
-                    <h3>Precio total: {film.price * count}</h3>
+                    {
+                        !isAddClicked
+                        ?
+                        <>
+                            <ItemCount film={film} count={count} setCount={setCount}/>
+                            <h3>Precio total: {price * count}</h3>
+                            <button className='film-options-btn' onClick={handleAddClicked}>Agregar al carrito</button>
+                        </>
+                        :
+                        <>  
+                            <Link to={'/cart'} className='options-link' >
+                                <button className='film-options-btn'><b>Ir al carrito</b></button>
+                            </Link>
+                            <Link to={'/'} className='options-link' >
+                                <button className='film-options-btn'><b>Seguir comprando</b></button>
+                            </Link>
+                            <Link to={'/'} className='options-link' >
+                                <button onClick={handleEndOfShop} className='film-options-btn'><b>Terminar compra</b></button>
+                            </Link>
+                        </>
 
-                    {!isAddClicked 
-                    ?
-                        <button className='film-options-btn' onClick={handleAddClicked}>Agregar al carrito</button>
-                    :
-                    <>
-                        <button className='film-options-btn' onClick={() => {navigate('/cart')}}><b>Ir al carrito</b></button>
-                        <button className='film-options-btn' onClick={() => {navigate('/')}}><b>Seguir comprando</b></button>
-                    </>
                     }
                 </div>
             }
@@ -69,3 +85,41 @@ const ItemDetails = ({films}) => {
 }
 
 export default ItemDetails
+
+/* 
+                <div className="film-options">
+
+                    {
+                        !isAddClicked &&
+                        <>
+                            <ItemCount film={film} count={count} setCount={setCount}/>
+                            <h3>Precio total: {price * count}</h3>
+                        </>
+                    }
+                    {isInCart(film.id) 
+                    ?
+                    
+                        <Link to={'/'} className='options-link' >
+                            <button onClick={handleEndOfShop} className='film-options-btn'><b>Terminar compra</b></button>
+                        </Link>
+                    :
+                    <>
+                        {
+                        !isAddClicked 
+                        ?
+                            <button className='film-options-btn' onClick={handleAddClicked}>Agregar al carrito</button>
+                        :
+                        <>  
+                            <Link to={'/cart'} className='options-link' >
+                                <button className='film-options-btn'><b>Ir al carrito</b></button>
+                            </Link>
+                            <Link to={'/'} className='options-link' >
+                                <button className='film-options-btn'><b>Seguir comprando</b></button>
+                            </Link>
+                        </>
+                        }
+                    
+                    </>
+                    }
+                </div>
+*/

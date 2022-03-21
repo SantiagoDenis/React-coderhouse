@@ -1,53 +1,68 @@
 import { Icon } from "@iconify/react";
-import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom'
+import { useContext } from "react";
+import {Link} from 'react-router-dom'
 import image from '../itemDetailsContainer/fight-club-poster.jpg'
+import './cart.css'
+import '../item/item.css'
+import { CartContext } from "../../context/CartContext";
 
-const Cart = ({films}) => {
-    //esto luego sera agregado dinamicamente cuando sepa como agregar los items al carrito
-    const film = films[0]
-    const [load, setLoad] = useState('')
-    let navigate = useNavigate()
-    //use effect para simular retardos
-    useEffect( () => {
 
-        const fakeRequest = new Promise ( (resolve) => {
-            setTimeout( () => {
-                const url = 'films'
-                if (url === 'films') {
-                    resolve('200')
-                }
-            }, 2000)
-            })
-        fakeRequest.then(res => {
-            setLoad(res)
-        })
+const Cart = () => {
 
-    }, [])
+    const {cartItems, removeItem, clearCart, watchTotalPrice} = useContext(CartContext)
 
+
+    const handleEndOfShop = () => {
+        clearCart()
+        alert('Su compra ha sido exitosa!')
+    }
 
     return (
-        load === '200'
-        ?
-        <div className="cart-container">
-            <div className="cart-item">
-                <h1 className="item-section-title">{film.filmName}</h1>
-                <img className="item-section-img" src={image} alt={film.filmName} />
-                <div className="item-section-option">
-                    <h3>Compraras (x cantidad) de copia/s</h3>
-                    <button className="highlight" onClick={() => {navigate('/item/1')}}>Agregar mas</button>
-                </div>
-                <div className="item-section-price">
-                    <h3>Precio total:</h3>
-                    <h2 className="highlight">{film.price}</h2>
-                </div>
-                <Icon className="item-section-icon" icon="ant-design:close-circle-twotone" color="#780d16" /> 
+
+            <div className="cart-container">
+                {
+                     cartItems.length !== 0
+                    ? 
+                    cartItems.map( (film) => {
+                        return (
+                            <div className="cart-item" key={film.id}>
+                                <h1 className="item-section-title">{film.filmName}</h1>
+                                <img className="item-section-img" src={image} alt={film.filmName} />
+                                <div className="item-section-option">
+                                    <h3>Compraras {film.cantidad} {film.cantidad === 1 ? 'copia' : 'copias'}</h3>
+                                    <Link to={`/item/${film.id}`} className="highlight-link">
+                                        <button className="film-options-btn" onClick={() => removeItem(film.id)}>Cambiar cantidad</button>
+                                    </Link>
+                                </div>
+                                <div className="item-section-price">
+                                    <h3>Precio:</h3>
+                                    <h2 className="highlight">{film.price * film.cantidad}</h2>
+                                </div>
+                                <Icon onClick={() => {removeItem(film.id)}} className="item-section-icon" icon="ic:baseline-delete-forever" color="#780d16"/>
+                            </div>
+                        )
+                    })
+
+                    :
+                    <>
+                        <h1>No has agregado ninguna pelicula por el momento!</h1>
+                        <Link to={'/'} className="highlight-link">
+                            <button className="film-options-btn">Quiero comprar!</button>
+                        </Link>
+                    </>
+                }
+                {cartItems.length !== 0 && (
+                    <div className="btns-container">
+                        <Link to={'/'}>
+                            <button onClick={handleEndOfShop} className="film-options-btn">Terminar compra</button>
+                        </Link>
+                        <button onClick={clearCart} className="film-options-btn">Vaciar Carrito</button>
+                        <h1>{`Precio total: $${watchTotalPrice()}`}</h1>
+                    </div>
+                )}
+
             </div>
-        </div>
-        :
-        <div className="loader-container">
-            <h1>Cargando contenido</h1>
-        </div>
+
      );
 }
  

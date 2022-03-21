@@ -16,7 +16,9 @@
     grid-template-columns: .5fr 1.5fr 1.5fr .6fr .4fr; 
     grid-template-rows: 1fr;
     justify-content: center;
-    background-color: rgb(12, 18, 32);
+    background-color: rgb(17, 20, 27);
+    box-shadow: 0px 1px 20px 0px rgb(0, 0, 0);
+    margin-bottom: 5%;
 }
 
 .item-section-title {
@@ -42,11 +44,16 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .item-section-option h3, .item-section-price h3 {
     text-shadow: #000 2px 0 5px;
+    text-align: center;
+}
+
+.highlight-link {
+    width: 80%;
 }
 
 .highlight {
@@ -69,13 +76,24 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: flex-start;
+    align-items: center;
     font-family: 'Neuton', serif;
     text-shadow: #000 2px 0 5px;
 }
 
 .item-section-icon {
-    width: 40%;
+    width: 50%;
     height: 50%;
-    align-self: flex-start;
+    align-self: center;
+    margin: auto;
+    cursor: pointer;
+}
+
+
+.btns-container {
+    width: 50%;
+}
+
+.btn-container-link {
+    color: #780D16;
 }

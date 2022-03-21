@@ -56,7 +56,7 @@
     text-align: center;
     border: none;
     border-radius: 3px;
-    width: 50%;
+    width: 100%;
     background-color: rgba(49, 49, 49, 0.1);
     backdrop-filter: blur(10px);
     color: #9ab;
@@ -64,11 +64,24 @@
     margin-bottom: 20px;
     font-size: .9em;
 }
-
-.red {
+.close-btn {
+    padding: 10px;
+    text-align: center;
+    border: none;
+    border-radius: 3px;
+    width: 50%;
     background-color: rgba(168, 2, 2, 0.103);
+    backdrop-filter: blur(10px);
+    color: #9ab;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: .9em;
 }
 
-.intro-btn:hover {
+.introduction-link {
+    width: 50%;
+}
+
+.intro-btn:hover, .close-btn:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }

@@ -1,30 +1,29 @@
 
 import { useState, useEffect } from 'react';
 
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
 import fakeApi from './helpers/promise';
 
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 
 import Footer from './components/footer/Footer';
-import './components/footer/footer.css';
 
 import ItemListContainer from './components/itemListContainer/ItemListContainer'
-import './components/itemListContainer/itemListContainer.css'
-
 
 import ItemDetailsContainer from './components/itemDetailsContainer/ItemDetailsContainer'
-import './components/itemDetailsContainer/itemDetailsContainer.css'
 
 import Introduction from './components/introduction/Introduction'
-import './components/introduction/introduction.css'
 
-import Navbar from './components/navbar/Navbar';
-import './components/navbar/navbar.css'
+import Navbar from './components/Navbar/Navbar';
+
 import Contact from './components/contact/Contact';
-import './components/contact/contact.css'
+
 import Cart from './components/cart/Cart';
-import './components/cart/cart.css';
+
+import CartContextProvider from './context/CartContext';
+
+
 
 function App() {
 
@@ -51,12 +50,12 @@ function App() {
       }
     }
 
-
-
-
   return ( 
-    <BrowserRouter>
+   
+    <CartContextProvider>
     
+      <BrowserRouter>
+      
         <div className="App">
 
           <Navbar addIntro={addIntro} removeIntro={removeIntro}/>
@@ -73,7 +72,7 @@ function App() {
 
               <Route path='item/:id' element={<ItemDetailsContainer films={films} />} /> 
 
-              <Route path='cart' element={<Cart films={films}/>} />
+              <Route path='cart' element={<Cart />} />
 
               <Route path='contact' element={<Contact/>} />
               
@@ -87,8 +86,12 @@ function App() {
           <Footer />
         </div>
 
-    </BrowserRouter>
+      </BrowserRouter>
+
+    </CartContextProvider>
+
   );
 }
+
 
 export default App;

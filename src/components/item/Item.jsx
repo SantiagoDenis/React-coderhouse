@@ -1,20 +1,18 @@
 
 
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import './item.css'
+import '../cart/cart.css'
 
 
 const Item = ({film, removeIntro}) => {
 
-    let navigate = useNavigate()
-
-    const navigateAndRemove = (navigationUrl) => {
-        navigate(navigationUrl)
+    const remove = () => {
         removeIntro()
-    }
-    useEffect( () => {})    
+    }   
 
-     const [isOptionsShown, setIsOptionsShown] = useState(false)
+     const [isOptionsShown, setIsOptionsShown] = useState(true)
  
 
     const handleMouseOver = () => {
@@ -29,15 +27,17 @@ const Item = ({film, removeIntro}) => {
 
     return (
             <>
-                {!isOptionsShown && <img src={film.img} alt={film.filmName} onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave} />}
+                {isOptionsShown && <img src={film.img} alt={film.filmName} onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave} />}
                 {
-                isOptionsShown && 
-                <div className="over-img" onMouseLeave={handleMouseLeave}>
-                    <h3>{film.filmName}</h3>
-                    <div className="options">
-                        <button onClick={() => {
-                            navigateAndRemove(`/item/${film.id}`)
-                        }} className='options-btn'>Detalles</button>
+                !isOptionsShown && 
+                <div className="over-img" style={{backgroundImage: `url(${film.img})`}} onMouseLeave={handleMouseLeave}>
+                    <div className="item-gradient">
+                        <h3>{film.filmName}</h3>
+                        <div className="options">
+                            <Link to={`/item/${film.id}`} className="link">
+                                <button onClick={remove} className='options-btn'>Detalles</button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             }

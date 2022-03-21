@@ -1,7 +1,13 @@
+import { useContext } from 'react';
 import {NavLink} from 'react-router-dom'
+import { CartContext } from '../../context/CartContext';
 import CartWidget from '../cartWidget/CartWidget';
+import './navbar.css'
 
 const Navbar = ({addIntro, removeIntro}) => {
+    
+    const {watchQuantity} = useContext(CartContext)
+    
     return (
         <nav className="navbar">
             <div className="container">

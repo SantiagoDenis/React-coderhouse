@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import './footer.css'
 
 const Footer = () => {
     return (
