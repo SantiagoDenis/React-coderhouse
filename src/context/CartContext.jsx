@@ -9,20 +9,9 @@ const CartContextProvider = ({children}) => {
         return cartItems.some(item => item.id === id)
     }
     
-    const addItem = (item, quantity, price) => {
-        if (!isInCart(item.id)) {
-            setCartItems( prevCartItems => [...prevCartItems, {...item, cantidad: quantity, price: price}])
-        } else {
-            alert('Este item ya ha sido agregado previamente! Para modificar su cantidad, dirigete al carrito de compras.')
-        }
-    }
-
+    
     const removeItem = (id) => {
         setCartItems (prevCartItems => prevCartItems.filter((cartItem) => cartItem.id !== id) )
-    }
-
-    const clearCart = () => {
-        setCartItems([])
     }
 
     const watchQuantity = () => {
@@ -30,14 +19,27 @@ const CartContextProvider = ({children}) => {
             return totalQuantity + item.cantidad
         }, 0)
     }
+    
+    const addItem = (item, quantity, price) => {
+        if (!isInCart(item.id)) {
+            setCartItems( prevCartItems => [...prevCartItems, {...item, cantidad: quantity, price: price}])
+        } else {
+            const doubledItem = cartItems.find((cartItem) => cartItem.id === item.id)
+            removeItem(item.id)
+            setCartItems( prevCartItems => [...prevCartItems, {...doubledItem, cantidad: (watchQuantity() + quantity), price: price}])
+        }
+    }
+
+    const clearCart = () => {
+        setCartItems([])
+    }
+
     const watchTotalPrice = () => {
         return cartItems.reduce((totalPrice, item) => {
             return totalPrice + item.price * item.cantidad
         }, 0)
     }
-    const changeQuantity = (item, quantity) => {
-        setCartItems( prevCartItems => [...prevCartItems, {...item, cantidad: quantity}])
-    }
+
 
 
 
@@ -49,7 +51,7 @@ const CartContextProvider = ({children}) => {
             clearCart,             
             isInCart,
             watchQuantity,
-            watchTotalPrice,
+            watchTotalPrice
         }}>
             
             {children}
