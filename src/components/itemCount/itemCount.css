@@ -24,7 +24,7 @@
 }
 
 
-.count-container h2 {
+.count {
     width: 40%;
     height: 35%;
     text-align: center;
@@ -37,17 +37,35 @@
     width: 10%;
     border: none;
     color: #9ab;
-    background-color: rgb(29, 29, 39);
     cursor: pointer;
 
 }
 
 .left-btn {
     border-radius: 3px 0 0 3px;
+    background-color: rgb(29, 29, 39);
 }
 
 .right-btn {
     border-radius: 0 3px 3px 0;
+    background-color: rgb(29, 29, 39);
+}
+.left-btn-light {
+    border-radius: 3px 0 0 3px;
+    background-color: rgb(69, 98, 133);
+}
+
+.right-btn-light {
+    border-radius: 0 3px 3px 0;
+    background-color: rgb(69, 98, 133);
+}
+
+.count-light {
+    width: 40%;
+    height: 35%;
+    text-align: center;
+    text-justify: auto;
+    background-color: rgb(69, 98, 133);
 }
 
 .count-container button:hover {

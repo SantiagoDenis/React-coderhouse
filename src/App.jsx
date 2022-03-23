@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
@@ -22,6 +22,7 @@ import Contact from './components/contact/Contact';
 import Cart from './components/cart/Cart';
 
 import CartContextProvider from './context/CartContext';
+import { ThemeContext } from './context/ThemeContext';
 
 
 
@@ -29,6 +30,8 @@ function App() {
 
   const [films, setFilms] = useState([])
   const [isOn, setIsOn] = useState(false)
+
+  const {theme} = useContext(ThemeContext)
   
   useEffect( () => {
 
@@ -62,7 +65,7 @@ function App() {
 
           {isOn && <Introduction removeIntro={removeIntro}/>}
 
-          <div className="main-container">
+          <div className={`main-container${theme ? '-light' : ''}`}>
 
             <Routes>
 

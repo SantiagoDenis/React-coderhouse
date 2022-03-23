@@ -6,11 +6,14 @@ import './itemDetailsContainer.css'
 
 
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
 
 const ItemDetailsContainer = ({films}) => {
 
     const {id} = useParams()
+
+    const { theme } = useContext(ThemeContext)
 
     const [load, setLoad] = useState()
     useEffect( () => {
@@ -33,7 +36,7 @@ const ItemDetailsContainer = ({films}) => {
         ?
         <div className="details-wrapper">
             <div className="background-image-details">
-                <div className="gradient-details">
+                <div className={`gradient-details${theme ? '-light' : ''}`}>
                 </div>
             </div>
             <div className="itemDetails-container">

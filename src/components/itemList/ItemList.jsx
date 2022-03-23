@@ -2,11 +2,15 @@ import Item from '../item/Item'
 import '../item/item.css'
 import '../itemList/itemList.css'
 import { Icon } from "@iconify/react";
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
 
 
 
 
 const ItemList = ({heading, films, removeIntro}) => {
+
+    const { theme } = useContext(ThemeContext)
 
     return (
 

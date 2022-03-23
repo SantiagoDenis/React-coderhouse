@@ -5,7 +5,7 @@
     min-height: 52px;
 /*     background-color: #14181c;  */
     background-color: transparent;
-    color: #9ab;
+ 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,16 +39,36 @@
   }
   
   
-  a {
-    text-decoration: none;
-    color: #9ab;
-    font-weight: 500;
+
+
+  .links-light {
+    color: rgb(0, 0, 0);
+  }
+
+  .btn-links {
+    background-color: transparent;
+    border: none;
+    width: 30px;
+    height: 30px;
+    color: white;
+  }
+  .btn-links-light {
+    background-color: transparent;
+    border: none;
+    width: 30px;
+    height: 30px;
+  }
+
+  .theme-icon {
+    width: 90%;
+    height: 90%;
   }
   
   .header-links {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    font-weight: 800;
   }
 
   .header-links .links {
@@ -56,7 +76,7 @@
   }
   
   .header-links .links:hover {
-    color: rgb(211, 234, 255);
+    color: rgb(0, 0, 0);
     
 }
 

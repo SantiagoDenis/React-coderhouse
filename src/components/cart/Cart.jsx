@@ -5,12 +5,14 @@ import image from '../itemDetailsContainer/fight-club-poster.jpg'
 import './cart.css'
 import '../item/item.css'
 import { CartContext } from "../../context/CartContext";
+import { ThemeContext } from "../../context/ThemeContext";
 
 
 const Cart = () => {
 
     const {cartItems, removeItem, clearCart, watchTotalPrice} = useContext(CartContext)
 
+    const { theme } = useContext(ThemeContext)
 
     const handleEndOfShop = () => {
         clearCart()
@@ -25,7 +27,7 @@ const Cart = () => {
                     ? 
                     cartItems.map( (film) => {
                         return (
-                            <div className="cart-item" key={film.id}>
+                            <div className={`cart-item${theme ? '-light' : ''}`} key={film.id}>
                                 <h1 className="item-section-title">{film.filmName}</h1>
                                 <img className="item-section-img" src={image} alt={film.filmName} />
                                 <div className="item-section-option">

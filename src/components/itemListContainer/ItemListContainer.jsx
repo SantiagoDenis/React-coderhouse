@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import { useParams } from "react-router-dom";
 import ItemList from "../itemList/ItemList";
@@ -8,6 +8,7 @@ import './itemListContainer.css'
 import fakeApi from '../../helpers/promise';
 
 import Search from '../search/Search';
+import { ThemeContext } from '../../context/ThemeContext';
 
 
 
@@ -15,6 +16,7 @@ const ItemListContainer = ({removeIntro}) => {
 
     const { categoria } = useParams()
 
+    const {theme} = useContext(ThemeContext)
 
     const [films, setFilms] = useState([])
     const [loader, setLoader] = useState(true)
@@ -36,7 +38,7 @@ const ItemListContainer = ({removeIntro}) => {
 
 
     return (
-        <>  
+        <div className='items-lists-container'>  
             <h1 className='greetings'>Hola Pili! Bienvenida al sitio</h1>
             <Search/>
             {categoria
@@ -51,7 +53,7 @@ const ItemListContainer = ({removeIntro}) => {
             }
 
 
-        </>
+        </div>
     )
 }
 export default ItemListContainer

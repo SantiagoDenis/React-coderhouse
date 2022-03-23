@@ -1,10 +1,15 @@
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
 import './contact.css'
 
 
 const Contact = () => {
+
+    const { theme } = useContext(ThemeContext)
+
     return ( 
-        <div className="background-image-contact">
-            <div className="gradient-contact">
+        <div className={`background-image-contact${theme ? '-light' : ''}`}>
+            <div className={`gradient-contact${theme ? '-light' : ''}`}>
                 <div className="form-container">
                     <h1 className="contact-title">Crea tu perfil!</h1>
                     <form>

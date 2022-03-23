@@ -1,12 +1,15 @@
 
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import './item.css'
 import '../cart/cart.css'
+import { ThemeContext } from '../../context/ThemeContext';
 
 
 const Item = ({film, removeIntro}) => {
+
+    const {theme} = useContext(ThemeContext)
 
     const remove = () => {
         removeIntro()
@@ -31,8 +34,8 @@ const Item = ({film, removeIntro}) => {
                 {
                 !isOptionsShown && 
                 <div className="over-img" style={{backgroundImage: `url(${film.img})`}} onMouseLeave={handleMouseLeave}>
-                    <div className="item-gradient">
-                        <h3>{film.filmName}</h3>
+                    <div className={`item-gradient${theme ? '-light' : ''}`}>
+                        <h3 className={`item-gradient-title${theme ? '-light' : ''}`}>{film.filmName}</h3>
                         <div className="options">
                             <Link to={`/item/${film.id}`} className="link">
                                 <button onClick={remove} className='options-btn'>Detalles</button>

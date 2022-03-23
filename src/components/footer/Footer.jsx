@@ -1,9 +1,14 @@
 import { Icon } from "@iconify/react";
+import { useContext } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
 import './footer.css'
 
 const Footer = () => {
+
+    const {theme} = useContext(ThemeContext)
+
     return (
-        <div className="footer">
+        <div className={`footer${theme ? '-light' : ''}`}>
             <div className="footer-container">
                 <div className="links-bar">
                     <a href="#">CONTACTO</a>

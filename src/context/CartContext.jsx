@@ -9,7 +9,6 @@ const CartContextProvider = ({children}) => {
         return cartItems.some(item => item.id === id)
     }
     
-    
     const removeItem = (id) => {
         setCartItems (prevCartItems => prevCartItems.filter((cartItem) => cartItem.id !== id) )
     }

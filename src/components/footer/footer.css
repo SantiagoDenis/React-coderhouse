@@ -5,6 +5,18 @@
     display: flex;
     justify-content: center;
     position: relative;
+    box-shadow: 0px 0px 16px 0px rgb(0, 0, 0);
+}
+
+.footer-light {
+    background-color: transparent;
+    width: 100vw;
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0px 0px 16px 0px rgb(0, 0, 0);
+
 }
 
 .footer-container {
@@ -22,6 +34,3 @@
 
 }
 
-.copywrite {
-    color: rgb(99, 107, 116);
-}
