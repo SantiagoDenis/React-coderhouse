@@ -1,8 +1,9 @@
 
+
 .cart-container {
     margin-top: 13vh;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,6 +12,7 @@
 
 .cart-item {
     height: 20%;
+    max-height: 150px;
     width: 80%;
     display: grid;
     grid-template-columns: .5fr 1.5fr 1.5fr .6fr .4fr; 
@@ -105,6 +107,7 @@
 
 .btns-container {
     width: 50%;
+    overflow: hidden;
 }
 
 .btn-container-link {

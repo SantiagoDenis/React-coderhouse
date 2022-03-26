@@ -1,7 +1,6 @@
 import { Icon } from "@iconify/react";
 import { useContext } from "react";
 import {Link} from 'react-router-dom'
-import image from '../itemDetailsContainer/fight-club-poster.jpg'
 import './cart.css'
 import '../item/item.css'
 import { CartContext } from "../../context/CartContext";
@@ -29,7 +28,7 @@ const Cart = () => {
                         return (
                             <div className={`cart-item${theme ? '-light' : ''}`} key={film.id}>
                                 <h1 className="item-section-title">{film.filmName}</h1>
-                                <img className="item-section-img" src={image} alt={film.filmName} />
+                                <img className="item-section-img" src={film.poster} alt={film.filmName} />
                                 <div className="item-section-option">
                                     <h3>Compraras {film.cantidad} {film.cantidad === 1 ? 'copia' : 'copias'}</h3>
                                     <Link to={`/item/${film.id}`} className="highlight-link">

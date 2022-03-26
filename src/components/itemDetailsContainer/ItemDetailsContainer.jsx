@@ -6,43 +6,37 @@ import './itemDetailsContainer.css'
 
 
 import { useParams } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
+import { useEffect, useState } from 'react';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
 
-const ItemDetailsContainer = ({films}) => {
+
+const ItemDetailsContainer = () => {
 
     const {id} = useParams()
 
-    const { theme } = useContext(ThemeContext)
+    const [film, setFilm] = useState({})
 
-    const [load, setLoad] = useState()
+    const [load, setLoad] = useState(true)
     useEffect( () => {
 
-        const fakeRequest = new Promise ( (resolve) => {
-            setTimeout( () => {
-                const url = 'films'
-                if (url === 'films') {
-                    resolve('200')
-                }
-            }, 2000)
-        })
-        fakeRequest.then(res => {
-            setLoad(res)
-        })
+        const db = getFirestore()
+
+        const queryDoc = doc(db, 'items', id)
+
+        getDoc(queryDoc)
+        .then(response => setFilm({id: response.id, ...response.data()}))
+        .catch(err => console.log(err))
+        .finally(setLoad(false))
     }, [])
 
     return (
-        load === '200'
+        !load
+        
         ?
         <div className="details-wrapper">
-            <div className="background-image-details">
-                <div className={`gradient-details${theme ? '-light' : ''}`}>
-                </div>
-            </div>
-            <div className="itemDetails-container">
-            <ItemDetails films={films} id={id}/>
 
-            </div>
+            <ItemDetails film={film}/>
+
         </div>
         :
         <div className="loader-container">

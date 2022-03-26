@@ -3,8 +3,6 @@ import { useState, useEffect, useContext } from 'react';
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-import fakeApi from './helpers/promise';
-
 import './App.css';
 
 import Footer from './components/footer/Footer';
@@ -23,24 +21,17 @@ import Cart from './components/cart/Cart';
 
 import CartContextProvider from './context/CartContext';
 import { ThemeContext } from './context/ThemeContext';
+import Dropdown from './components/dropdown/dropdown';
 
 
 
 function App() {
 
-  const [films, setFilms] = useState([])
   const [isOn, setIsOn] = useState(false)
 
+  const [showDropdown, setShowDropdown] = useState(false)
+
   const {theme} = useContext(ThemeContext)
-  
-  useEffect( () => {
-
-      fakeApi
-      .then(response => setFilms(response))
-      .catch(err => alert(err))
-
-    }, [])
-
     
     const addIntro = () => {
       if(!isOn) {
@@ -61,9 +52,12 @@ function App() {
       
         <div className="App">
 
-          <Navbar addIntro={addIntro} removeIntro={removeIntro}/>
+          <Navbar addIntro={addIntro} removeIntro={removeIntro} showDropdown={showDropdown} setShowDropdown={setShowDropdown}/>
 
           {isOn && <Introduction removeIntro={removeIntro}/>}
+              
+          {showDropdown && <Dropdown showDropdown={showDropdown}/>}
+
 
           <div className={`main-container${theme ? '-light' : ''}`}>
 
@@ -73,7 +67,7 @@ function App() {
               <Route path='/' element={<ItemListContainer removeIntro={removeIntro}/>}/>
               <Route path='categoria/:categoria' element={<ItemListContainer />}/>
 
-              <Route path='item/:id' element={<ItemDetailsContainer films={films} />} /> 
+              <Route path='item/:id' element={<ItemDetailsContainer />} /> 
 
               <Route path='cart' element={<Cart />} />
 

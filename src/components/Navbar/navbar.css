@@ -39,10 +39,13 @@
   }
   
   
-
+.links {
+  color: white;
+}
 
   .links-light {
     color: rgb(0, 0, 0);
+    cursor: pointer;
   }
 
   .btn-links {
@@ -51,12 +54,14 @@
     width: 30px;
     height: 30px;
     color: white;
+    cursor: pointer;
   }
   .btn-links-light {
     background-color: transparent;
     border: none;
     width: 30px;
     height: 30px;
+    cursor: pointer;
   }
 
   .theme-icon {
@@ -75,10 +80,15 @@
     cursor: pointer;
   }
   
-  .header-links .links:hover {
+.links:hover, .btn-links:hover {
     color: rgb(0, 0, 0);
     
 }
+.links-light:hover, .btn-links-light:hover {
+    color: rgb(255, 251, 251);
+    
+}
+
 
 
 /* ================== Media Queries ================== */

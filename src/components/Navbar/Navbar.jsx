@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import {NavLink} from 'react-router-dom'
 import { CartContext } from '../../context/CartContext';
 import CartWidget from '../cartWidget/CartWidget';
@@ -6,7 +6,7 @@ import './navbar.css'
 import { ThemeContext } from '../../context/ThemeContext';
 import { Icon } from '@iconify/react';
 
-const Navbar = ({addIntro, removeIntro}) => {
+const Navbar = ({addIntro, removeIntro, showDropdown, setShowDropdown}) => {
 
     const {theme, setTheme} = useContext(ThemeContext)
 
@@ -23,9 +23,16 @@ const Navbar = ({addIntro, removeIntro}) => {
                     </NavLink>
                 </div>
                 <div className="header-links">
-                    <NavLink className={`links${theme ? '-light' : ''}`} to={'categoria/populares'} onClick={removeIntro}>Populares</NavLink>
-                    <NavLink className={`links${theme ? '-light' : ''}`} to={'categoria/clasicos'} onClick={removeIntro}>Clasicas</NavLink>
-                    <p className='links' onClick={addIntro}>Iniciar Sesion</p> 
+                    <div className={`links${theme ? '-light' : ''}`} onClick={() => setShowDropdown(prevDropdown => !prevDropdown)}>
+                        {
+                            !showDropdown
+                            ?
+                                <p className={`links${theme ? '-light' : ''}`}>Categorias<Icon icon="ic:outline-arrow-drop-down" /></p>
+                            :
+                                <p className={`links${theme ? '-light' : ''}`}>Categorias<Icon icon="ic:baseline-arrow-drop-up" /></p>
+                        }
+                    </div>
+                    <p className={`links${theme ? '-light' : ''}`} onClick={addIntro}>Iniciar Sesion</p> 
                     <button className={`btn-links${theme ? '-light' : ''}`} onClick={handleClickToggle}>{theme ? <Icon className='theme-icon' icon="ic:baseline-nightlight" /> : <Icon className='theme-icon' icon="ic:baseline-light-mode" />}</button>
                     <NavLink to={'cart'}>
                         <CartWidget />

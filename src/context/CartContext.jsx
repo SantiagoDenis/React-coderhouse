@@ -18,14 +18,19 @@ const CartContextProvider = ({children}) => {
             return totalQuantity + item.cantidad
         }, 0)
     }
-    
+
     const addItem = (item, quantity, price) => {
+        const overMaxQuantity = (realQuantity) => {
+            alert('te has sobrepasado del stock!')
+            return realQuantity = 10
+        }
         if (!isInCart(item.id)) {
             setCartItems( prevCartItems => [...prevCartItems, {...item, cantidad: quantity, price: price}])
         } else {
             const doubledItem = cartItems.find((cartItem) => cartItem.id === item.id)
+            const realQuantity = doubledItem.cantidad + quantity
             removeItem(item.id)
-            setCartItems( prevCartItems => [...prevCartItems, {...doubledItem, cantidad: (watchQuantity() + quantity), price: price}])
+            setCartItems( prevCartItems => [...prevCartItems, {...doubledItem, cantidad: (realQuantity > 10 ? overMaxQuantity(realQuantity) : realQuantity), price: price}])
         }
     }
 

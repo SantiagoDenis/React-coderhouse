@@ -1,0 +1,13 @@
+.dropdown {
+    position: fixed;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.247);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 7vh;
+    margin-top: 10vh;
+    overflow: hidden;
+    backdrop-filter: blur(7px);
+  }
