@@ -32,6 +32,9 @@ const Navbar = ({addIntro, removeIntro, showDropdown, setShowDropdown}) => {
                                 <p className={`links${theme ? '-light' : ''}`}>Categorias<Icon icon="ic:baseline-arrow-drop-up" /></p>
                         }
                     </div>
+                        <NavLink to={"orders"}>
+                        <p className={`links${theme ? '-light' : ''}`}>Compras</p>
+                        </NavLink>
                     <p className={`links${theme ? '-light' : ''}`} onClick={addIntro}>Iniciar Sesion</p> 
                     <button className={`btn-links${theme ? '-light' : ''}`} onClick={handleClickToggle}>{theme ? <Icon className='theme-icon' icon="ic:baseline-nightlight" /> : <Icon className='theme-icon' icon="ic:baseline-light-mode" />}</button>
                     <NavLink to={'cart'}>

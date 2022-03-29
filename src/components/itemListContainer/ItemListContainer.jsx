@@ -7,8 +7,7 @@ import './itemListContainer.css'
 
 import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore'
 
-import { ThemeContext } from '../../context/ThemeContext';
-import Item from '../item/Item';
+import { CartContext } from '../../context/CartContext';
 
 
 
@@ -16,7 +15,7 @@ const ItemListContainer = ({removeIntro}) => {
 
     const { categoria } = useParams()
 
-    const {theme} = useContext(ThemeContext)
+    const {user} = useContext(CartContext)
 
     const [films, setFilms] = useState([])
 
@@ -58,13 +57,11 @@ const ItemListContainer = ({removeIntro}) => {
             .catch(err => console.log(err))
             .finally(setLoader(false))
         }
-  
-
     }, [categoria])
     
     return (
         <div className='items-lists-container'>  
-            <h1 className='greetings'>Hola Pili! Bienvenida al sitio</h1>
+            <h1 className='greetings'>{`Hola ${ user.name !== '' ? user.name : ''}! Bienvenido al sitio`}</h1>
             {
             categoria
              ? 

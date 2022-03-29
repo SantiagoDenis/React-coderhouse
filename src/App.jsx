@@ -22,6 +22,7 @@ import Cart from './components/cart/Cart';
 import CartContextProvider from './context/CartContext';
 import { ThemeContext } from './context/ThemeContext';
 import Dropdown from './components/dropdown/dropdown';
+import Orders from './components/orders/Orders';
 
 
 
@@ -72,6 +73,8 @@ function App() {
               <Route path='cart' element={<Cart />} />
 
               <Route path='contact' element={<Contact/>} />
+
+              <Route path='orders' element={<Orders/>} />
               
               <Route path='/*' element={<Navigate to='/' replace />} /> 
 

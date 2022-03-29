@@ -9,11 +9,10 @@ import { ThemeContext } from '../../context/ThemeContext';
 
 
 const ItemDetails = ({film}) => {
-    
 
     const { theme } = useContext(ThemeContext)
 
-    const {addItem, removeItem} = useContext(CartContext)
+    const {addItem, removeItem, handleEndOfShop} = useContext(CartContext)
     
     const [count, setCount] = useState(1)
 
@@ -25,13 +24,12 @@ const ItemDetails = ({film}) => {
         addItem(film, count, film.price)
     }
 
-    const handleEndOfShop = () => {
+    const finishShop = () => {
+        handleEndOfShop()
         removeItem(film.id)
-        alert('Su compra ha sido exitosa!')
     }
 
     const backgroundImage = film.poster
-    console.log(backgroundImage)
     
     return (
 
@@ -87,7 +85,7 @@ const ItemDetails = ({film}) => {
                                         <button className='film-options-btn'><b>Seguir comprando</b></button>
                                     </Link>
                                     <Link to={'/'} className='options-link' >
-                                        <button onClick={handleEndOfShop} className='film-options-btn'><b>Terminar compra</b></button>
+                                        <button onClick={finishShop} className='film-options-btn'><b>Terminar compra</b></button>
                                     </Link>
                                 </>
 

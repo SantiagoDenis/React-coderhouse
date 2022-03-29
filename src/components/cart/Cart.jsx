@@ -9,14 +9,17 @@ import { ThemeContext } from "../../context/ThemeContext";
 
 const Cart = () => {
 
-    const {cartItems, removeItem, clearCart, watchTotalPrice} = useContext(CartContext)
+    const {cartItems, removeItem, clearCart, watchTotalPrice, handleEndOfShop} = useContext(CartContext)
 
     const { theme } = useContext(ThemeContext)
 
-    const handleEndOfShop = () => {
+
+
+    const finishShop = () => {
+        handleEndOfShop()
         clearCart()
-        alert('Su compra ha sido exitosa!')
     }
+
 
     return (
 
@@ -55,7 +58,7 @@ const Cart = () => {
                 {cartItems.length !== 0 && (
                     <div className="btns-container">
                         <Link to={'/'}>
-                            <button onClick={handleEndOfShop} className="film-options-btn">Terminar compra</button>
+                            <button onClick={finishShop} className="film-options-btn">Terminar compra</button>
                         </Link>
                         <button onClick={clearCart} className="film-options-btn">Vaciar Carrito</button>
                         <h1>{`Precio total: $${watchTotalPrice()}`}</h1>
