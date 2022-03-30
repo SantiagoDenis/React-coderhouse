@@ -12,8 +12,6 @@ const CartContextProvider = ({children}) => {
         email: ''
     })
 
-    const [orderId, setOrderId] = useState('')
-
     const isInCart = (id) => {
         return cartItems.some(item => item.id === id)
     }
@@ -80,9 +78,8 @@ const CartContextProvider = ({children}) => {
             const newQueryCollection = collection(db, 'orders')
 
             addDoc(newQueryCollection, order)
-            .then(res => setOrderId(res.id))
+            .then(res => alert(`Felicidades por tu compra ${user.name}! El id de tu orden es ${res.id}`))
             .catch(err => console.log(err))
-            .finally(alert(`Felicidades por tu compra ${user.name}! El id de tu orden es ${orderId}`))
 
 
         } else {
