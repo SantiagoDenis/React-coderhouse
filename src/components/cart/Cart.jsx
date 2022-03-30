@@ -16,8 +16,8 @@ const Cart = () => {
 
 
     const finishShop = () => {
-        handleEndOfShop()
         clearCart()
+        handleEndOfShop()
     }
 
 
