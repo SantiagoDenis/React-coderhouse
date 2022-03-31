@@ -4,25 +4,33 @@ import { Link } from 'react-router-dom';
 import './introduction.css'
 import { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
+import { CartContext } from '../../context/CartContext';
 
 
-const Introduction =  ({removeIntro}) => {
+const Introduction =  () => {
 
     const { theme } = useContext(ThemeContext)
-
-    const remove = () => {
-        removeIntro()
-    }
+    const { isLogged } = useContext(CartContext)
     
     return (
             <div className={`background-image${theme ? '-light' : ''}`}>
                 <div className={`gradient${theme ? '-light' : ''}`}>
                     <div className="intro-sign">
                         <h1 className='intro-title'>La pelicula que deseas, al alcance de un click</h1>  
-                        <Link to={'contact'} className="introduction-link" >
-                            <button onClick={ remove } className='intro-btn'>Inicia Sesion!</button>  
+                        {
+                            !isLogged
+                            ?
+                            <Link to={'contact'} className="introduction-link" >
+                                <button className='intro-btn'>Inicia Sesion!</button>  
+                            </Link>
+                            :
+                            <Link to={'watchlist'} className="introduction-link" >
+                                <button className='intro-btn'>Mi watchlist</button>  
+                            </Link>
+                        }
+                        <Link to={'orders'} className="introduction-link">
+                            <button className='close-btn'>Ver mis compras</button>
                         </Link>
-                        <button className='close-btn' onClick={removeIntro}>Cerrar introduccion</button>
                     </div>
 
                 </div>

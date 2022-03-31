@@ -1,0 +1,25 @@
+.orders-container {
+    margin-top: 15vh;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 15px;
+}
+.not-orders-container {
+    margin-top: 15vh;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+}
+
+.order-container {
+    width: 100%;
+    height: 100%;
+    min-height: 30vh;
+}
+
+.order-title {
+    font-weight: 200;
+    font-size: 1.3em;
+}

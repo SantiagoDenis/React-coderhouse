@@ -85,7 +85,7 @@
     text-align: center;
     border: none;
     border-radius: 3px;
-    width: 50%;
+    width: 100%;
     background-color: rgba(168, 2, 2, 0.103);
     backdrop-filter: blur(10px);
     color: #9ab;

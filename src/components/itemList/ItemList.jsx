@@ -5,7 +5,7 @@ import '../itemList/itemList.css'
 
 
 
-const ItemList = ({heading, films, removeIntro}) => {
+const ItemList = ({heading, films}) => {
 
 
 
@@ -25,7 +25,6 @@ const ItemList = ({heading, films, removeIntro}) => {
                     <div key={film.id} className="item-container">
                         <Item
                             film={film}
-                            removeIntro={removeIntro}
                             />
                     </div>
                     )

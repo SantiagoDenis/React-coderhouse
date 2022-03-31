@@ -7,13 +7,10 @@ import '../cart/cart.css'
 import { ThemeContext } from '../../context/ThemeContext';
 
 
-const Item = ({film, removeIntro}) => {
+const Item = ({film}) => {
 
     const {theme} = useContext(ThemeContext)
-
-    const remove = () => {
-        removeIntro()
-    }   
+  
 
      const [isOptionsShown, setIsOptionsShown] = useState(true)
  
@@ -38,7 +35,7 @@ const Item = ({film, removeIntro}) => {
                         <h3 className={`item-gradient-title${theme ? '-light' : ''}`}>{film.filmName}</h3>
                         <div className="options">
                             <Link to={`/item/${film.id}`} className="link">
-                                <button onClick={remove} className='options-btn'>Detalles</button>
+                                <button className='options-btn'>Detalles</button>
                             </Link>
                         </div>
                     </div>

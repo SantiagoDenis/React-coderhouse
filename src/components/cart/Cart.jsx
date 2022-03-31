@@ -1,29 +1,41 @@
 import { Icon } from "@iconify/react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import {Link} from 'react-router-dom'
 import './cart.css'
 import '../item/item.css'
 import { CartContext } from "../../context/CartContext";
 import { ThemeContext } from "../../context/ThemeContext";
+import ContactForm from '../contactForm/ContactForm';
+
 
 
 const Cart = () => {
 
-    const {cartItems, removeItem, clearCart, watchTotalPrice, handleEndOfShop} = useContext(CartContext)
+    const {cartItems, removeItem, clearCart, watchTotalPrice, handleEndOfShop, isLogged} = useContext(CartContext)
 
     const { theme } = useContext(ThemeContext)
 
-
+    const [isFinishShopClicked, setIsFinishShopClicked] = useState(false)
 
     const finishShop = () => {
         handleEndOfShop()
-        clearCart()
+        setIsFinishShopClicked(true)
+        if (isLogged) {
+            clearCart()
+        }
     }
 
 
     return (
 
             <div className="cart-container">
+                {
+                (!isLogged && isFinishShopClicked)
+                &&
+                <div className="pop-up-contact">
+                    <ContactForm/>
+                </div>
+            }
                 {
                      cartItems.length !== 0
                     ? 
@@ -57,9 +69,7 @@ const Cart = () => {
                 }
                 {cartItems.length !== 0 && (
                     <div className="btns-container">
-                        <Link to={'/'}>
-                            <button onClick={finishShop} className="film-options-btn">Terminar compra</button>
-                        </Link>
+                        <button onClick={finishShop} className='film-options-btn'><b>Terminar compra</b></button>
                         <button onClick={clearCart} className="film-options-btn">Vaciar Carrito</button>
                         <h1>{`Precio total: $${watchTotalPrice()}`}</h1>
                     </div>

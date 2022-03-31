@@ -11,8 +11,6 @@ import ItemListContainer from './components/itemListContainer/ItemListContainer'
 
 import ItemDetailsContainer from './components/itemDetailsContainer/ItemDetailsContainer'
 
-import Introduction from './components/introduction/Introduction'
-
 import Navbar from './components/Navbar/Navbar';
 
 import Contact from './components/contact/Contact';
@@ -23,6 +21,7 @@ import CartContextProvider from './context/CartContext';
 import { ThemeContext } from './context/ThemeContext';
 import Dropdown from './components/dropdown/dropdown';
 import Orders from './components/orders/Orders';
+import Watchlist from './components/watchlist/watchlist';
 
 
 
@@ -33,17 +32,6 @@ function App() {
   const [showDropdown, setShowDropdown] = useState(false)
 
   const {theme} = useContext(ThemeContext)
-    
-    const addIntro = () => {
-      if(!isOn) {
-        setIsOn(prevIsOn => !prevIsOn)
-      }
-    }
-    const removeIntro = () => {
-      if(isOn) {
-        setIsOn(prevIsOn => !prevIsOn)
-      }
-    }
 
   return ( 
    
@@ -53,9 +41,7 @@ function App() {
       
         <div className="App">
 
-          <Navbar addIntro={addIntro} removeIntro={removeIntro} showDropdown={showDropdown} setShowDropdown={setShowDropdown}/>
-
-          {isOn && <Introduction removeIntro={removeIntro}/>}
+          <Navbar showDropdown={showDropdown} setShowDropdown={setShowDropdown}/>
               
           {showDropdown && <Dropdown showDropdown={showDropdown}/>}
 
@@ -65,7 +51,7 @@ function App() {
             <Routes>
 
 
-              <Route path='/' element={<ItemListContainer removeIntro={removeIntro}/>}/>
+              <Route path='/' element={<ItemListContainer/>}/>
               <Route path='categoria/:categoria' element={<ItemListContainer />}/>
 
               <Route path='item/:id' element={<ItemDetailsContainer />} /> 
@@ -75,6 +61,8 @@ function App() {
               <Route path='contact' element={<Contact/>} />
 
               <Route path='orders' element={<Orders/>} />
+
+              <Route path='watchlist' element={<Watchlist/>}/>
               
               <Route path='/*' element={<Navigate to='/' replace />} /> 
 

@@ -6,17 +6,20 @@ import './itemDetails.css'
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
 import { ThemeContext } from '../../context/ThemeContext';
+import ContactForm from '../contactForm/ContactForm';
 
 
 const ItemDetails = ({film}) => {
 
     const { theme } = useContext(ThemeContext)
 
-    const {addItem, removeItem, handleEndOfShop} = useContext(CartContext)
+    const {addItem, removeItem, handleEndOfShop, isLogged} = useContext(CartContext)
     
     const [count, setCount] = useState(1)
 
     const [isAddClicked, setIsAddClicked] = useState(false)
+
+    const [isFinishShopClicked, setIsFinishShopClicked] = useState(false)
 
 
     const handleAddClicked = () => {
@@ -27,13 +30,22 @@ const ItemDetails = ({film}) => {
     const finishShop = () => {
         handleEndOfShop()
         removeItem(film.id)
+        setIsFinishShopClicked(true)
     }
+
 
     const backgroundImage = film.poster
     
     return (
 
         <>
+            {
+                (!isLogged && isFinishShopClicked)
+                &&
+                <div className="pop-up-contact">
+                    <ContactForm/>
+                </div>
+            }
             <div className="background-image-details" style={{
             backgroundImage: [`url(${backgroundImage})`],
             width: '80vw',
@@ -84,9 +96,7 @@ const ItemDetails = ({film}) => {
                                     <Link to={'/'} className='options-link' >
                                         <button className='film-options-btn'><b>Seguir comprando</b></button>
                                     </Link>
-                                    <Link to={'/'} className='options-link' >
-                                        <button onClick={finishShop} className='film-options-btn'><b>Terminar compra</b></button>
-                                    </Link>
+                                    <button onClick={finishShop} className='film-options-btn'><b>Terminar compra</b></button>
                                 </>
 
                             }

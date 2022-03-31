@@ -7,11 +7,13 @@ import './itemListContainer.css'
 
 import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore'
 
+import Introduction from '../introduction/Introduction'
+
 import { CartContext } from '../../context/CartContext';
 
 
 
-const ItemListContainer = ({removeIntro}) => {
+const ItemListContainer = () => {
 
     const { categoria } = useParams()
 
@@ -60,22 +62,25 @@ const ItemListContainer = ({removeIntro}) => {
     }, [categoria])
     
     return (
-        <div className='items-lists-container'>  
-            <h1 className='greetings'>{`Hola ${ user.name !== '' ? user.name : ''}! Bienvenido al sitio`}</h1>
-            {
-            categoria
-             ? 
-             <ItemList films={films.length !== 0 && filterFilms(films, categoria)} heading={`Filtrado por: ${categoria}`} removeIntro={removeIntro}/>
-            :
-            <>
-                        
-                <ItemList films={films.length !== 0 && filterFilms(films, 'populares')} heading='Las Populares esta semana' removeIntro={removeIntro}/>
+        <div className='items-lists-container'> 
+            <Introduction/>
+            <div className='content-container'>
+                <h1 className='greetings'>{`Hola ${ user.name !== '' ? user.name : ''}! Bienvenido al sitio`}</h1>
+                {
+                categoria
+                ? 
+                <ItemList films={films.length !== 0 && filterFilms(films, categoria)} heading={`Filtrado por: ${categoria}`}/>
+                :
+                <>
+                            
+                    <ItemList films={films.length !== 0 && filterFilms(films, 'populares')} heading='Las Populares esta semana'/>
 
-                <ItemList films={films.length !== 0 && filterFilms(films, 'clasicos')} heading='Las Clasicas del cine' removeIntro={removeIntro}/>
+                    <ItemList films={films.length !== 0 && filterFilms(films, 'clasicos')} heading='Las Clasicas del cine'/>
 
-                <ItemList films={films.length !== 0 && filterFilms(films, 'recomendados')} heading='Las Recomendadas para vos' removeIntro={removeIntro}/>
-            </>
-            }
+                    <ItemList films={films.length !== 0 && filterFilms(films, 'recomendados')} heading='Las Recomendadas para vos'/>
+                </>
+                }
+            </div> 
 
 
         </div>

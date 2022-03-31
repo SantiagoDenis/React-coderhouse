@@ -1,3 +1,9 @@
 .items-lists-container {
     margin-bottom: 35vh;
 }
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

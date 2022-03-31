@@ -9,8 +9,11 @@ const CartContextProvider = ({children}) => {
     const [user, setUser] = useState({
         name: '',
         phone: '',
-        email: ''
+        email: '',
+        emailConfirmation: ''
     })
+
+    const [isLogged, setIsLogged] = useState(false)
 
     const isInCart = (id) => {
         return cartItems.some(item => item.id === id)
@@ -52,7 +55,8 @@ const CartContextProvider = ({children}) => {
     }
     
     const handleEndOfShop = () => {
-        if (user.name !== '' && user.phone !== '' && user.email !== '') {
+        if (user.name !== '' && user.phone !== '' && user.email !== '' && user.emailConfirmation !== '') {
+
             let date = new Date()
             
             let order = {}
@@ -60,7 +64,8 @@ const CartContextProvider = ({children}) => {
             order.buyer = {
                 name: user.name,
                 phone: user.phone,
-                email: user.email
+                email: user.email,
+                emailConfirmation: user.emailConfirmation
             }
 
             order.items = cartItems.map(film => ({
@@ -69,7 +74,7 @@ const CartContextProvider = ({children}) => {
                 price: film.price * film.cantidad
             })) 
 
-            order.date = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}: ${date.getHours()}, ${date.getMinutes()} `
+            order.date = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}; ${date.getHours()}:${date.getMinutes()} hs `
 
             order.total = watchTotalPrice()
 
@@ -98,7 +103,13 @@ const CartContextProvider = ({children}) => {
 
     const updateUserData = (e) => {
         e.preventDefault()
-        alert(`Bienvenido ${user.name}`)
+
+        if (user.email === user.emailConfirmation) {
+            setIsLogged(true)
+            alert(`Bienvenido ${user.name}`)
+        } else {
+            alert('confirmacion de email fallida, intenta de nuevo')
+        }
     }
 
 
@@ -108,6 +119,7 @@ const CartContextProvider = ({children}) => {
         <CartContext.Provider value={{
             cartItems,
             user,
+            isLogged,
             addItem,
             removeItem,
             clearCart,             
@@ -116,7 +128,8 @@ const CartContextProvider = ({children}) => {
             watchTotalPrice,
             handleEndOfShop,
             setUserData,
-            updateUserData
+            updateUserData,
+            setIsLogged
         }}>
             
             {children}

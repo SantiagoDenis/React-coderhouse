@@ -6,7 +6,7 @@ import './navbar.css'
 import { ThemeContext } from '../../context/ThemeContext';
 import { Icon } from '@iconify/react';
 
-const Navbar = ({addIntro, removeIntro, showDropdown, setShowDropdown}) => {
+const Navbar = ({ showDropdown, setShowDropdown}) => {
 
     const {theme, setTheme} = useContext(ThemeContext)
 
@@ -33,9 +33,14 @@ const Navbar = ({addIntro, removeIntro, showDropdown, setShowDropdown}) => {
                         }
                     </div>
                         <NavLink to={"orders"}>
-                        <p className={`links${theme ? '-light' : ''}`}>Compras</p>
+                            <p className={`links${theme ? '-light' : ''}`}>Compras</p>
                         </NavLink>
-                    <p className={`links${theme ? '-light' : ''}`} onClick={addIntro}>Iniciar Sesion</p> 
+                        <NavLink to={"watchlist"}>
+                            <p className={`links${theme ? '-light' : ''}`}>Watchlist</p>
+                        </NavLink>
+                        <NavLink to={'contact'}>
+                            <p className={`links${theme ? '-light' : ''}`}>Iniciar Sesion</p> 
+                        </NavLink>
                     <button className={`btn-links${theme ? '-light' : ''}`} onClick={handleClickToggle}>{theme ? <Icon className='theme-icon' icon="ic:baseline-nightlight" /> : <Icon className='theme-icon' icon="ic:baseline-light-mode" />}</button>
                     <NavLink to={'cart'}>
                         <CartWidget />
