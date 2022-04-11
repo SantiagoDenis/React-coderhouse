@@ -1,5 +1,4 @@
-
-
+//The setup of firebase, linking it in my proyect
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {

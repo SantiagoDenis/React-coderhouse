@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import ThemeContextProvider, { ThemeContext } from './context/ThemeContext';
+import ThemeContextProvider from './context/ThemeContext';
 import firestoreApp from './firebase/config';
 
 firestoreApp()
+//Index is the parent element of app.
 
 ReactDOM.render(
   <React.StrictMode>

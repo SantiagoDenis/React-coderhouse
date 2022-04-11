@@ -4,6 +4,7 @@ import { CartContext } from '../../context/CartContext';
 
 
 const ContactForm = () => {
+    //The form that sets the user data. Its renderd in the contact page and conditionally when the user wants to buy something if its not logged in.
 
     const { user, setUserData, updateUserData } = useContext(CartContext)
 

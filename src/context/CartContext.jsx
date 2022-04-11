@@ -1,9 +1,15 @@
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { addDoc, collection, documentId, getDocs, getFirestore, query, where, writeBatch } from "firebase/firestore";
 import { createContext, useState } from "react";
+import { toast } from "react-toastify";
+
+//This is the cart context: Where i'll be defining the cart items and the user (the owner of those items). Also is the space in which some firebase operations will take place. Such as adding orders from the user and updating the stock depending of the quantity ordered of each item.
 
 export const CartContext = createContext([])
 
 const CartContextProvider = ({children}) => {
+
+    //The definition of states used in this context
+
     const [cartItems, setCartItems] = useState([])
 
     const [user, setUser] = useState({
@@ -14,6 +20,8 @@ const CartContextProvider = ({children}) => {
     })
 
     const [isLogged, setIsLogged] = useState(false)
+
+    //All the cart functions
 
     const isInCart = (id) => {
         return cartItems.some(item => item.id === id)
@@ -31,7 +39,7 @@ const CartContextProvider = ({children}) => {
 
     const addItem = (item, quantity, price) => {
         const overMaxQuantity = (realQuantity) => {
-            alert('te has sobrepasado del stock!')
+            toast.error('Te has sobrepasado del stock!')
             return realQuantity = 10
         }
         if (!isInCart(item.id)) {
@@ -53,10 +61,12 @@ const CartContextProvider = ({children}) => {
             return totalPrice + item.price * item.cantidad
         }, 0)
     }
-    
-    const handleEndOfShop = () => {
-        if (user.name !== '' && user.phone !== '' && user.email !== '' && user.emailConfirmation !== '') {
 
+    //The asynchronous function that handles the end of the order. It creates the order with the relevant data, then pushes that order to firebase and updates the stock when doing it.
+    
+    const handleEndOfShop = async () => {
+        if (user.name !== '' && user.phone !== '' && user.email !== '' && user.emailConfirmation !== '') {
+            setIsLogged(true)
             let date = new Date()
             
             let order = {}
@@ -71,7 +81,8 @@ const CartContextProvider = ({children}) => {
             order.items = cartItems.map(film => ({
                 id: film.id, 
                 name: film.filmName, 
-                price: film.price * film.cantidad
+                price: film.price * film.cantidad,
+                cantidad: film.cantidad
             })) 
 
             order.date = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}; ${date.getHours()}:${date.getMinutes()} hs `
@@ -83,14 +94,38 @@ const CartContextProvider = ({children}) => {
             const newQueryCollection = collection(db, 'orders')
 
             addDoc(newQueryCollection, order)
-            .then(res => alert(`Felicidades por tu compra ${user.name}! El id de tu orden es ${res.id}`))
+            .then(res => toast.success(
+                <div>
+                    {`Felicidades por tu compra ${user.name}! El id de tu orden es ${res.id}`}
+                    <br />
+                    Puedes ver tu orden de compra y su id en tu perfil
+                </div>
+                ))
             .catch(err => console.log(err))
+
+            const queryCollection = collection(db, 'items')
+
+            const updateStock = query(
+                queryCollection, where( documentId() , 'in', cartItems.map(film => film.id) )          
+            )
+
+            const batch = writeBatch(db)
+
+            await getDocs(updateStock)
+                .then(resp => resp.docs.forEach(res => batch.update(res.ref, {
+                    stock: res.data().stock - cartItems.find(item => item.id === res.id).cantidad
+            }) ))
+            .catch(err => console.log(err))
+
+            batch.commit()
 
 
         } else {
-            alert('Por favor, inicia sesion antes comprar')
+            toast.warn('Por favor, inicia sesion antes comprar')
         }
     }
+
+    //The last two functions setting the user data from the form
 
     const setUserData = (e) => {
         setUser (prevUser => (
@@ -106,9 +141,9 @@ const CartContextProvider = ({children}) => {
 
         if (user.email === user.emailConfirmation) {
             setIsLogged(true)
-            alert(`Bienvenido ${user.name}`)
+            toast(`Bienvenido ${user.name}`)
         } else {
-            alert('confirmacion de email fallida, intenta de nuevo')
+            toast.error('confirmacion de email fallida, intenta de nuevo')
         }
     }
 

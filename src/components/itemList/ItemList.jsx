@@ -7,8 +7,7 @@ import '../itemList/itemList.css'
 
 const ItemList = ({heading, films}) => {
 
-
-
+    //Render of each list of films
     return (
 
         <div className="items-panel">

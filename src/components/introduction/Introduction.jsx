@@ -1,38 +1,31 @@
 
 import '../Navbar/navbar.css';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import './introduction.css'
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
-import { CartContext } from '../../context/CartContext';
 
 
 const Introduction =  () => {
 
     const { theme } = useContext(ThemeContext)
-    const { isLogged } = useContext(CartContext)
-    
+
+    const [requested, SetRequested] = useState(false)
     return (
             <div className={`background-image${theme ? '-light' : ''}`}>
                 <div className={`gradient${theme ? '-light' : ''}`}>
-                    <div className="intro-sign">
-                        <h1 className='intro-title'>La pelicula que deseas, al alcance de un click</h1>  
-                        {
-                            !isLogged
-                            ?
-                            <Link to={'contact'} className="introduction-link" >
-                                <button className='intro-btn'>Inicia Sesion!</button>  
-                            </Link>
-                            :
-                            <Link to={'watchlist'} className="introduction-link" >
-                                <button className='intro-btn'>Mi watchlist</button>  
-                            </Link>
-                        }
-                        <Link to={'orders'} className="introduction-link">
-                            <button className='close-btn'>Ver mis compras</button>
-                        </Link>
+                    <div className="intro-container">
+                        <div className="intro-sign">
+                            <div className="intro-links">
+                                <Link to={'orders'} onClick={() => SetRequested(true)} className="introduction-link">
+                                    <button className='intro-btn'>Mis compras</button>
+                                </Link>
+                            </div>
+                        </div>
+                        <div className={`${requested && 'user-request'}`}>
+                            <Outlet/>
+                        </div>
                     </div>
-
                 </div>
             </div>
 

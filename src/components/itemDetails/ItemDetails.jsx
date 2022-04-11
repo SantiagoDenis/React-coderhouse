@@ -2,7 +2,6 @@
 import ItemCount from '../itemCount/ItemCount'
 import { useContext, useState } from 'react'
 import './itemDetails.css'
-
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
 import { ThemeContext } from '../../context/ThemeContext';
@@ -13,26 +12,23 @@ const ItemDetails = ({film}) => {
 
     const { theme } = useContext(ThemeContext)
 
-    const {addItem, removeItem, handleEndOfShop, isLogged} = useContext(CartContext)
+    const {addItem, isLogged} = useContext(CartContext)
     
     const [count, setCount] = useState(1)
 
+    const [isAddToCartClicked, setIsAddToCartClicked] = useState(false)
+
     const [isAddClicked, setIsAddClicked] = useState(false)
 
-    const [isFinishShopClicked, setIsFinishShopClicked] = useState(false)
-
-
-    const handleAddClicked = () => {
+    const addCLicked = () => {
         setIsAddClicked(prevIsAddClicked => !prevIsAddClicked)
+    }
+
+    const addToCart = () => {
+        addCLicked()
+        setIsAddToCartClicked(prevIsAddToCartClicked => !prevIsAddToCartClicked)
         addItem(film, count, film.price)
     }
-
-    const finishShop = () => {
-        handleEndOfShop()
-        removeItem(film.id)
-        setIsFinishShopClicked(true)
-    }
-
 
     const backgroundImage = film.poster
     
@@ -40,12 +36,19 @@ const ItemDetails = ({film}) => {
 
         <>
             {
-                (!isLogged && isFinishShopClicked)
+                isAddClicked
                 &&
-                <div className="pop-up-contact">
-                    <ContactForm/>
-                </div>
+                <>                
+                    {
+                        (!isLogged)
+                        &&
+                        <div className="pop-up-contact">
+                            <ContactForm/>
+                        </div>
+                    }
+                </>
             }
+
             <div className="background-image-details" style={{
             backgroundImage: [`url(${backgroundImage})`],
             width: '80vw',
@@ -53,10 +56,11 @@ const ItemDetails = ({film}) => {
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover'
         
-        }}>
+            }}>
                 <div className={`gradient-details${theme ? '-light' : ''}`}>
                 </div>
             </div>
+
             <div className="itemDetails-container">
                 <div className="details-container">
                     <div className="film-info">
@@ -81,12 +85,12 @@ const ItemDetails = ({film}) => {
                         <div className="film-options">
 
                             {
-                                !isAddClicked
+                                !isAddToCartClicked
                                 ?
                                 <>
                                     <ItemCount film={film} count={count} setCount={setCount}/>
                                     <h3>Precio total: {film.price * count}</h3>
-                                    <button className='film-options-btn' onClick={handleAddClicked}>Agregar al carrito</button>
+                                    <button className='film-options-btn' onClick={addToCart}>Agregar al carrito</button>
                                 </>
                                 :
                                 <>  
@@ -96,7 +100,9 @@ const ItemDetails = ({film}) => {
                                     <Link to={'/'} className='options-link' >
                                         <button className='film-options-btn'><b>Seguir comprando</b></button>
                                     </Link>
-                                    <button onClick={finishShop} className='film-options-btn'><b>Terminar compra</b></button>
+                                    <Link to={'/cart'} className='options-link' >
+                                        <button className='film-options-btn'><b>Terminar compra</b></button>
+                                    </Link>
                                 </>
 
                             }
@@ -110,41 +116,3 @@ const ItemDetails = ({film}) => {
 }
 
 export default ItemDetails
-
-/* 
-                <div className="film-options">
-
-                    {
-                        !isAddClicked &&
-                        <>
-                            <ItemCount film={film} count={count} setCount={setCount}/>
-                            <h3>Precio total: {price * count}</h3>
-                        </>
-                    }
-                    {isInCart(film.id) 
-                    ?
-                    
-                        <Link to={'/'} className='options-link' >
-                            <button onClick={handleEndOfShop} className='film-options-btn'><b>Terminar compra</b></button>
-                        </Link>
-                    :
-                    <>
-                        {
-                        !isAddClicked 
-                        ?
-                            <button className='film-options-btn' onClick={handleAddClicked}>Agregar al carrito</button>
-                        :
-                        <>  
-                            <Link to={'/cart'} className='options-link' >
-                                <button className='film-options-btn'><b>Ir al carrito</b></button>
-                            </Link>
-                            <Link to={'/'} className='options-link' >
-                                <button className='film-options-btn'><b>Seguir comprando</b></button>
-                            </Link>
-                        </>
-                        }
-                    
-                    </>
-                    }
-                </div>
-*/

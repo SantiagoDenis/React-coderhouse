@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import {NavLink} from 'react-router-dom'
 import { CartContext } from '../../context/CartContext';
 import CartWidget from '../cartWidget/CartWidget';
@@ -8,11 +8,17 @@ import { Icon } from '@iconify/react';
 
 const Navbar = ({ showDropdown, setShowDropdown}) => {
 
+    
     const {theme, setTheme} = useContext(ThemeContext)
-
+    
+    const { isLogged } = useContext(CartContext)
+    
+    //In the nav, the user sets the theme that is most comfortable with. That is this function for.
     const handleClickToggle = () => {
         setTheme( prevTheme => !prevTheme)
     }
+
+    //Note: From now on, all the classes will be conditional depending on the theme the user choosed.
     
     return (
         <nav className="navbar">
@@ -24,6 +30,7 @@ const Navbar = ({ showDropdown, setShowDropdown}) => {
                 </div>
                 <div className="header-links">
                     <div className={`links${theme ? '-light' : ''}`} onClick={() => setShowDropdown(prevDropdown => !prevDropdown)}>
+                        {/* conditional rendering to show the dropdown handler with different icons depending whether the user clicked it or not. */}
                         {
                             !showDropdown
                             ?
@@ -32,15 +39,20 @@ const Navbar = ({ showDropdown, setShowDropdown}) => {
                                 <p className={`links${theme ? '-light' : ''}`}>Categorias<Icon icon="ic:baseline-arrow-drop-up" /></p>
                         }
                     </div>
-                        <NavLink to={"orders"}>
-                            <p className={`links${theme ? '-light' : ''}`}>Compras</p>
-                        </NavLink>
-                        <NavLink to={"watchlist"}>
-                            <p className={`links${theme ? '-light' : ''}`}>Watchlist</p>
-                        </NavLink>
-                        <NavLink to={'contact'}>
-                            <p className={`links${theme ? '-light' : ''}`}>Iniciar Sesion</p> 
-                        </NavLink>
+                    {/* Conditional rendering to show if the user is logged or not */}
+                    {
+                        !isLogged
+                        ?
+                            <NavLink to={'contact'}>
+                                <p className={`links${theme ? '-light' : ''}`}>Iniciar Sesion</p> 
+                            </NavLink>
+                        :
+                        <>
+                            <NavLink to={'user'}>
+                                <p className={`links${theme ? '-light' : ''}`}>Mi Perfil</p>
+                            </NavLink>
+                        </>
+                    }
                     <button className={`btn-links${theme ? '-light' : ''}`} onClick={handleClickToggle}>{theme ? <Icon className='theme-icon' icon="ic:baseline-nightlight" /> : <Icon className='theme-icon' icon="ic:baseline-light-mode" />}</button>
                     <NavLink to={'cart'}>
                         <CartWidget />

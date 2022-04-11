@@ -5,9 +5,9 @@ import { ThemeContext } from '../../context/ThemeContext';
 import './dropdown.css'
 
 
-
+//Dropdown component that shows to the user the different categories there are available.
 const Dropdown = ({showDropdown}) => {
-    const {theme, setTheme} = useContext(ThemeContext)
+    const { theme } = useContext(ThemeContext)
     return (
         <>
             {
