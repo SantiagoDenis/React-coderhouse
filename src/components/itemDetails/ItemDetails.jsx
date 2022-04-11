@@ -40,7 +40,7 @@ const ItemDetails = ({film}) => {
                 &&
                 <>                
                     {
-                        (!isLogged)
+                        !isLogged
                         &&
                         <div className="pop-up-contact">
                             <ContactForm/>
@@ -48,14 +48,13 @@ const ItemDetails = ({film}) => {
                     }
                 </>
             }
-
+            {/* Inline style so i can add a dynamic background img */}
             <div className="background-image-details" style={{
-            backgroundImage: [`url(${backgroundImage})`],
-            width: '80vw',
-            height: '90vh',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover'
-        
+                backgroundImage: [`url(${backgroundImage})`],
+                width: '80vw',
+                height: '90vh',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover'
             }}>
                 <div className={`gradient-details${theme ? '-light' : ''}`}>
                 </div>
@@ -78,35 +77,34 @@ const ItemDetails = ({film}) => {
                     {
                         film.stock === 0 
                         ? 
-                        <div className="film-options">
-                            <h1>Ups! Parece que no tenemos stock por el momento! <br /> Vuelve mas tarde!</h1>
-                        </div>
+                            <div className="film-options">
+                                <h1>Ups! Parece que no tenemos stock por el momento! <br /> Vuelve mas tarde!</h1>
+                            </div>
                         :
-                        <div className="film-options">
+                            <div className="film-options">
 
-                            {
-                                !isAddToCartClicked
-                                ?
-                                <>
-                                    <ItemCount film={film} count={count} setCount={setCount}/>
-                                    <h3>Precio total: {film.price * count}</h3>
-                                    <button className='film-options-btn' onClick={addToCart}>Agregar al carrito</button>
-                                </>
-                                :
-                                <>  
-                                    <Link to={'/cart'} className='options-link' >
-                                        <button className='film-options-btn'><b>Ir al carrito</b></button>
-                                    </Link>
-                                    <Link to={'/'} className='options-link' >
-                                        <button className='film-options-btn'><b>Seguir comprando</b></button>
-                                    </Link>
-                                    <Link to={'/cart'} className='options-link' >
-                                        <button className='film-options-btn'><b>Terminar compra</b></button>
-                                    </Link>
-                                </>
-
-                            }
-                        </div>
+                                {
+                                    !isAddToCartClicked
+                                    ?
+                                        <>
+                                            <ItemCount film={film} count={count} setCount={setCount}/>
+                                            <h3>Precio total: {film.price * count}</h3>
+                                            <button className='film-options-btn' onClick={addToCart}>Agregar al carrito</button>
+                                        </>
+                                    :
+                                        <>  
+                                            <Link to={'/cart'} className='options-link' >
+                                                <button className='film-options-btn'><b>Ir al carrito</b></button>
+                                            </Link>
+                                            <Link to={'/'} className='options-link' >
+                                                <button className='film-options-btn'><b>Seguir comprando</b></button>
+                                            </Link>
+                                            <Link to={'/cart'} className='options-link' >
+                                                <button className='film-options-btn'><b>Terminar compra</b></button>
+                                            </Link>
+                                        </>
+                                }
+                            </div>
                     }
                 </div>
             </div>

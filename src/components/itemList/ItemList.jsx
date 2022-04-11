@@ -19,15 +19,15 @@ const ItemList = ({heading, films}) => {
             {
                 films
                 ?
-                films.map( (film) => {
-                    return (
-                    <div key={film.id} className="item-container">
-                        <Item
-                            film={film}
-                            />
-                    </div>
-                    )
-                })
+                    films.map( (film) => {
+                        return (
+                        <div key={film.id} className="item-container">
+                            <Item
+                                film={film}
+                                />
+                        </div>
+                        )
+                    })
                 : 
                     <h1 className='loader'>Loading</h1>
             }

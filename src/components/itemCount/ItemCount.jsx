@@ -1,7 +1,7 @@
 
 import { Icon } from '@iconify/react'
 import './itemCount.css'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { ThemeContext } from '../../context/ThemeContext'
 
 

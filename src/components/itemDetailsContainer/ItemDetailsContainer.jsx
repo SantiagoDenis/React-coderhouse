@@ -12,11 +12,13 @@ import { doc, getDoc, getFirestore } from 'firebase/firestore';
 
 const ItemDetailsContainer = () => {
 
+    //Taking the id of each item to show
     const {id} = useParams()
 
     const [film, setFilm] = useState({})
 
     const [load, setLoad] = useState(true)
+    //Bringing that item from the database
     useEffect( () => {
 
         const db = getFirestore()
@@ -31,18 +33,16 @@ const ItemDetailsContainer = () => {
 
     return (
         !load
-        
         ?
-        <div className="details-wrapper">
+            <div className="details-wrapper">
 
-            <ItemDetails film={film}/>
+                <ItemDetails film={film}/>
 
-        </div>
+            </div>
         :
-        <div className="loader-container">
-            <h1>Cargando contenido</h1>
-        </div>
-
+            <div className="loader-container">
+                <h1>Cargando contenido</h1>
+            </div>
     )
 }
 export default ItemDetailsContainer 

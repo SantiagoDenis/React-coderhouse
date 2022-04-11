@@ -21,9 +21,6 @@ const ItemListContainer = () => {
     const {user} = useContext(CartContext)
 
     const [films, setFilms] = useState([])
-
-    const [loader, setLoader] = useState(true)
-
     
     const filterFilms = (filmsArr, categoria) => {
         return filmsArr.filter((film) => film.categoria === categoria)
@@ -46,7 +43,7 @@ const ItemListContainer = () => {
             }))
             )
             .catch(err => console.log(err))
-            .finally(setLoader(false))
+            //There is no finally setting a loader to false because that loading state is in the item list childrens
             
         } else {
 
@@ -58,40 +55,33 @@ const ItemListContainer = () => {
             }))
             )
             .catch(err => console.log(err))
-            .finally(setLoader(false))
         }
     }, [categoria])
     
     return (
-        <>
-            {
-                !loader
-                ?
-                <div className='items-lists-container'> 
+
+        <div className='items-lists-container'> 
                 
-                    <div className='content-container'>
-                        <h1 className='greetings'>{`Hola ${ user.name !== '' ? user.name : ''}! Bienvenido al sitio`}</h1>
-                        {
-                        categoria
-                        ? 
-                        <ItemList films={films.length !== 0 && filterFilms(films, categoria)} heading={`Filtrado por: ${categoria}`}/>
-                        :
-                        <>
-                                    
-                            <ItemList films={films.length !== 0 && filterFilms(films, 'populares')} heading='Las Populares esta semana'/>
-
-                            <ItemList films={films.length !== 0 && filterFilms(films, 'clasicos')} heading='Las Clasicas del cine'/>
-
-                            <ItemList films={films.length !== 0 && filterFilms(films, 'recomendados')} heading='Las Recomendadas para vos'/>
-                        </>
-                        }
-                    </div> 
-
-                </div>
+            <div className='content-container'>
+                <h1 className='greetings'>{`Hola ${ user.name !== '' ? user.name : ''}! Bienvenido al sitio`}</h1>
+                {
+                categoria
+                ? 
+                <ItemList films={films.length !== 0 && filterFilms(films, categoria)} heading={`Filtrado por: ${categoria}`}/>
                 :
-                <h1 className='loader'>Loading</h1>
-            }
-        </>
+                <>
+                                    
+                    <ItemList films={films.length !== 0 && filterFilms(films, 'populares')} heading='Las Populares esta semana'/>
+
+                    <ItemList films={films.length !== 0 && filterFilms(films, 'clasicos')} heading='Las Clasicas del cine'/>
+
+                    <ItemList films={films.length !== 0 && filterFilms(films, 'recomendados')} heading='Las Recomendadas para vos'/>
+                </>
+                }
+            </div> 
+
+        </div>
+
     )
 }
 export default ItemListContainer

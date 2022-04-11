@@ -1,6 +1,6 @@
 
 
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom'
 import './item.css'
 import '../cart/cart.css'
@@ -27,20 +27,25 @@ const Item = ({film}) => {
 
     return (
             <>
-                {isOptionsShown && <img src={film.img} alt={film.filmName} onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave} />}
                 {
-                !isOptionsShown && 
-                <div className="over-img" style={{backgroundImage: `url(${film.img})`}} onMouseLeave={handleMouseLeave}>
-                    <div className={`item-gradient${theme ? '-light' : ''}`}>
-                        <h3 className={`item-gradient-title${theme ? '-light' : ''}`}>{film.filmName}</h3>
-                        <div className="options">
-                            <Link to={`/item/${film.id}`} className="link">
-                                <button className='options-btn'>Detalles</button>
-                            </Link>
+                    isOptionsShown 
+                    && 
+                    <img src={film.img} alt={film.filmName} onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave} />
+                }
+                {
+                    !isOptionsShown 
+                    && 
+                    <div className="over-img" style={{backgroundImage: `url(${film.img})`}} onMouseLeave={handleMouseLeave}>
+                        <div className={`item-gradient${theme ? '-light' : ''}`}>
+                            <h3 className={`item-gradient-title${theme ? '-light' : ''}`}>{film.filmName}</h3>
+                            <div className="options">
+                                <Link to={`/item/${film.id}`} className="link">
+                                    <button className='options-btn'>Detalles</button>
+                                </Link>
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
+                }
             </>
 
 )

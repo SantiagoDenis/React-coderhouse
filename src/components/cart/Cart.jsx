@@ -17,6 +17,7 @@ const Cart = () => {
 
     const [isFinishShopClicked, setIsFinishShopClicked] = useState(false)
 
+    //Funciton for when the user finishes the shop
     const finishShop = () => {
         handleEndOfShop()
         setIsFinishShopClicked(true)
@@ -30,14 +31,14 @@ const Cart = () => {
 
             <div className="cart-container">
                 {
-                (!isLogged && isFinishShopClicked)
-                &&
-                <div className="pop-up-contact">
-                    <ContactForm/>
-                </div>
-            }
+                    (!isLogged && isFinishShopClicked)
+                    &&
+                    <div className="pop-up-contact">
+                        <ContactForm/>
+                    </div>
+                }
                 {
-                     cartItems.length !== 0
+                    cartItems.length !== 0
                     ? 
                     cartItems.map( (film) => {
                         return (
